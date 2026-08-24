@@ -1,0 +1,41 @@
+﻿file,expected_sha256,byte_size,status
+# ===========================================================================
+# FINAL INPUT MANIFEST — PDAC evidence-integration audit
+# Version stamp: v29_20260823_1718
+# Derived from repository/manifest/input_manifest.json (generated_utc 2026-08-21T06:45:23Z).
+#
+# HONESTY RULE: raw third-party inputs are NOT redistributed in this repo
+# (see input_manifest.json -> data_redistribution_statement and README.md).
+# All raw inputs below are marked "missing (not redistributed per licence)".
+# The precomputed results JSONs and figure outputs ARE present in the repo and
+# are marked "present" (sha256 verified on 2026-08-23 against the manifest).
+# NO numbers in this submission were regenerated here; they are carried from the
+# precomputed result JSONs. The pipeline in run_final_rerun_v29_20260823_1718.sh
+# can execute a clean rerun once the released inputs are supplied.
+# ===========================================================================
+evidence_layers_v11.json,a4cb1a84574e290b51a6627f947fcf45306ecdbd7fb1fdda3073a4761bf35499,11443183,missing (not redistributed per licence)
+depmap_pdac_dependency.json,13f629950a0052aa247eb7d494f54e43acb94b3d049ad145326e76db99e3daa2,1813670,missing (not redistributed per licence)
+depmap_crc_dependency.json,5043490693a25a02d8612618b8992df8ceff41d66ca08b9f2b78b32731dc19ce,1814400,missing (not redistributed per licence)
+e5_clinical_targets.json,9a525599a77393e2eb11d41b1c5cafa0dfabd8d353ee4506590e7c8f11ec4c30,3312,missing (not redistributed per licence)
+pdac_selective_dependency_v11.json,cdf085e26404f077c995244cac667eebe2a2a696c77e4e1670da1ecdd2a7e6d3,5294625,missing (not redistributed per licence)
+GDSC_IC50.csv,9dad3b047e20b59b88d88ba00f64ef53e7dcfc11e7cceab19d9e79ae746105bb,2058983,missing (not redistributed per licence)
+Cell_lines_annotations_20181226.txt,77648d1cada2f325ba2c049a5fb5408434f73b963c8e1148fb82ba2653e469e1,335355,missing (not redistributed per licence)
+GDSC_drug_list.csv,b88757dd7aa7979251832b4866ff605f716854705d49ea4cb256f794e262a74e,21781,missing (not redistributed per licence)
+v17_ncs_results.json,75c57180329390208bb339b140ee25241e52abe0ac7534f965d1bae294abcfa9,85415,present
+v18_audit_report.json,44cd7bc55732874f2f2b895cb43ee9ce490bdf2f7053e3232c4b428942b709ec,9640,present
+v18_ncs_results.json,3c43923d843153a8c4c1be60697a5db1325a59f896806b9cd94e442db071e4b8,75695,present
+v18_sentinel_audit.json,054f345e73dd9dfbfebb528109bb1b681e50957bedea5a1812c9d59b98be0f8d,8729,present
+v18_source_data.csv,704033f27df05103fc10755690dbf7445969b593b621eac79f099fde8b061dec,9579,present
+v18_weight_space.json,71269d7a3ad672746c87e7ad8c92d403a9394f02ec45698324b72fae6de409e9,101732,present
+figures/Fig1.pdf,695fb1892184b5d9d3ce2c77032481ba3bb764f2209f86ba4a83eb7c7cb02db6,45714,present
+figures/Fig1.png,698e918daf3d4719cc77731270d0d2ded6d2191c0eaebb471a4a4fec6d99f45d,164490,present
+figures/Fig2.pdf,605c15e040c7edd37c3df5d2a728541f6e17b0626bf143be04a05ada2119c30c,54983,present
+figures/Fig2.png,7fe223c93f49b7658b35c8496febb76a51d456440047674610a2190c195ecb18,233981,present
+figures/Fig3.pdf,b073dd1381628a40644cd4f9b06228ef86f7a47f7dafff5e95a8ca562ad80f75,54331,present
+figures/Fig3.png,1634f0e5371d4d0274e900270cabbd689696a3cd78fe77de8ca8de74926334d6,192362,present
+figures/Fig4.pdf,e83856acd5b05903af71ac4cdb350f28ce7ce114bdde909089aba509d68f3952,48443,present
+figures/Fig4.png,583e3d6a3e5330a41e9154a46364e5031fa8aac35a3129a6f20198d4f68d6176,192482,present
+figures/Fig5.pdf,4a2ee8883609ff142d519ed74e93ada6d3352353375c6dde06f7982ace666661,45740,present
+figures/Fig5.png,1607963c9b3615d55cbdf1fe5a7dbe7f6cdae21eb5a8e56aae716f4b074d21b4,192980,present
+figures/Fig6.pdf,5d144c3c1afd2a25749d6fcdbfcc0adf887d6257fa35790d4f6227b034c78ae8,48385,present
+figures/Fig6.png,f9b4e4381f458a06874ac8be41ddfb18bed12326f187d475a90c0d4fbe79bb7d,206676,present
