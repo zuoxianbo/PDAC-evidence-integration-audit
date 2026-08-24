@@ -13,7 +13,7 @@
 
 ## 二、主图（6 张，400 DPI，PNG + PDF，语义调色板，布局已修复）
 
-`figures_v31_20260823_1830/`（基于 clean rerun 结果重新渲染，数字完全一致）
+`figures_v32_20260824/`（基于 clean rerun 结果重新渲染，数字完全一致）
 - Fig. 1 — 单层证据 + 端点依赖结构
 - Fig. 2 — 13 评分器 × 8 端点基准矩阵
 - Fig. 3 — 整合 vs 中心性（效应量 + 社区重采样）
@@ -23,18 +23,18 @@
 
 ## 三、补充表格 + 扩展数据图
 
-- `supplementary_v31_20260823_1830/` — Supp Tables 1–5 + source_data.csv + pairwise CSV
-- `extended_data_v31_20260823_1830/` — ED Fig. 1–4（PNG+PDF，真实数据）
+- `supplementary_v32_20260824/` — Supp Tables 1–5 + source_data.csv + pairwise CSV
+- `extended_data_v32_20260824/` — ED Fig. 1–4（PNG+PDF，真实数据）
 
 ## 四、投稿材料
 
-- `cover_letter_v31_20260823_1830.md`、`author_contributions_v31_20260823_1830.md`、`competing_interests_v31_20260823_1830.md`
+- `cover_letter_v32_20260824.md`、`author_contributions_v32_20260824.md`、`competing_interests_v32_20260824.md`
 
 ## 五、代码与可复现性（clean rerun 已完成 ✅）
 
 `PDAC_evidence_integration_audit_code_v32_20260824.zip`
 
-**Clean rerun 完成记录（run_record_v31_20260824.txt）**：
+**Clean rerun 完成记录（run_record_v32_20260824.txt）**：
 - `git_commit_sha: c439c9af42792abb93fe97f505e7efdb40bd8d01`
 - `results_manifest_sha256: 4aa24440ebddbaf50e4921b71d98bfc37151e94d500ff812f3d290765bb1bb23`
 - 环境：`sc-models` venv（py3.11.9 / numpy1.26.4 / scipy1.17.1 / sklearn1.9.0，与 environment_lock 完全一致）
