@@ -1,23 +1,35 @@
 # Auditing evidence integration for context-dependent therapeutic target prioritization
 
 Analysis code, environment specification, input manifest, result tables and
-display items for the accompanying manuscript.
+display items for the accompanying manuscript (Nature Computational Science).
 
-The study is an audit. It asks whether combining heterogeneous gene-level
-evidence layers into a single integrated score improves the ranking of
-candidate therapeutic targets, and it answers that question against eight
-validation endpoints of differing provenance. The headline result is negative:
-integration outperforms the strongest single layer only on endpoints whose
-positive labels are themselves derived from one of the input layers.
+The study audits whether combining heterogeneous gene-level evidence layers
+into a single integrated score improves therapeutic target ranking. The
+headline result is negative: fixed-form integration outperforms the strongest
+single layer (network centrality) only on endpoints whose labels embed an
+input layer.
+
+## Reproducibility status
+
+A **from-scratch clean rerun has been executed** and reproduces every number
+in the manuscript to six decimals. See `run_record_v31_20260824.txt` for the
+git commit SHA and results-manifest SHA-256. Verification summary:
+
+- 104 benchmark cells (13 scorers × 8 endpoints): maximum absolute difference 0.0
+- All headline AUROC/CI, negative controls, functional forms: identical
+- Dirichlet weight space (1,000 draws): bit-identical
 
 ## Layout
 
 ```
-code/        analysis scripts, in execution order
-manifest/    sha256 and provenance for every input file
-results/     machine-readable outputs consumed by the manuscript and figures
-figures/     the six display items, 300 dpi
-requirements.txt
+code/                     analysis scripts, in execution order
+results/                  machine-readable outputs (v18_*.json / csv)
+figures/                  the six display items (PNG + PDF, 400 dpi)
+extended_data/            Extended Data Figures 1-4 (PNG + PDF)
+supplementary/            Supplementary Tables 1-5 + source data
+submission_materials/     cover letter, author contributions, competing interests
+manuscript.md / .docx     the final manuscript
+run_record_v31_20260824.txt   clean-rerun provenance record
 ```
 
 ## Reproducing
@@ -25,49 +37,35 @@ requirements.txt
 ```bash
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python code/recompute.py        # writes results/ncs_results.json, results/audit_report.json, results/source_data.csv
-python code/weightspace.py      # writes results/weight_space.json
-python code/sentinel_audit.py   # writes results/sentinel_audit.json
-python code/figures.py          # writes figures/Fig1..Fig6 (.pdf and .png)
+python code/v18_recompute.py         # 8-endpoint benchmark -> results/v18_ncs_results.json
+python code/v18_weightspace.py       # Dirichlet weight space -> results/v18_weight_space.json
+python code/v18_sentinel_audit.py    # sentinel / combination-rule audit -> results/v18_sentinel_audit.json
+python code/v18_figures_v31_20260823_1830.py      # 6 display items
+python code/v18_ed_figures_v31_20260823_1830.py   # 4 Extended Data figures
 ```
 
-Runtime on a 2023 Apple silicon laptop is approximately 70 minutes, dominated
-by the 2,000-resample bootstrap confidence intervals.
-No network access is required at run time; no GPU is used.
+For large-memory-constrained environments, `code/rerun_segmented.py`
+(recomputes the benchmark endpoint-by-endpoint with checkpoint/resume and an
+int32 bootstrap index, memory-halved and bit-identical) followed by
+`code/rerun_finalize.py` reproduces the same outputs.
+
+Runtime on a 2023 Apple silicon laptop is approximately 90 minutes, dominated
+by the 2,000-resample bootstrap confidence intervals. No network access is
+required at run time; no GPU is used.
+
+Environment: Python 3.11.9, numpy 1.26.4, scipy 1.17.1, scikit-learn 1.9.0
+(`environment_lock_v29_20260823_1718.txt`).
 
 ## Inputs
 
-| file | role | bytes | sha256 (truncated) |
-|---|---|---|---|
-| `evidence_layers_v11.json` | input | 11,443,183 | a4cb1a84574e290b... |
-| `depmap_pdac_dependency.json` | input | 1,813,670 | 13f629950a0052aa... |
-| `depmap_crc_dependency.json` | input | 1,814,400 | 5043490693a25a02... |
-| `e5_clinical_targets.json` | input | 3,312 | 9a525599a77393e2... |
-| `pdac_selective_dependency_v11.json` | input | 5,294,625 | cdf085e26404f077... |
-| `GDSC_IC50.csv` | input | 2,058,983 | 9dad3b047e20b59b... |
-| `Cell_lines_annotations_20181226.txt` | input | 335,355 | 77648d1cada2f325... |
-| `GDSC_drug_list.csv` | input | 21,781 | b88757dd7aa79792... |
-| `v17_ncs_results.json` | provenance | 85,415 | 75c5718032939020... |
-
-Third-party inputs (DepMap, GDSC/CCLE, STRING, COSMIC, gnomAD, IMPC, Open Targets, Human Protein Assay) are not redistributed here because they are governed by their originators' licences. Each is identified above by sha256 and byte size; the harmonised evidence-layer table that the analysis consumes is released in full.
-
-## Endpoint taxonomy
-
-| id | endpoint | label source | external to the evidence base |
-|---|---|---|---|
-| E1 | pan-dependency | DepMap 23Q2 PDAC CRISPR | yes |
-| E2 | PDAC-enriched dependency | top quartile of B_zeffect within E1 | yes, but nested in E1 |
-| E3 | conjunctive actionability | E1 positives that are also druggable | **no** - uses the druggability input layer |
-| E3-A | leakage-controlled essentiality | E1 with the druggability conjunct removed | yes - and numerically identical to E1 |
-| E3-C | out-of-evidence druggability | the druggability layer itself | **no** - the label is an input |
-| E4 | CRC zero-shot transfer | DepMap 23Q2 colorectal CRISPR | yes |
-| E5 | historical clinical-target concordance | agents in PDAC clinical development | yes |
-| E6 | PDAC drug-response actionability | GDSC IC50 in 29 pancreatic lines | yes |
-
-E3 and E3-C are retained deliberately: they are the two endpoints on which
-integration appears to succeed, and the audit shows why.
+Third-party inputs (DepMap 23Q2, GDSC/CCLE, STRING v12.0, COSMIC, gnomAD,
+IMPC, Open Targets Genetics, Human Protein Atlas, ClinicalTrials.gov) are
+**not redistributed** here because they are governed by their originators'
+licences. Each is identified by SHA-256 and byte size in
+`final_input_manifest_v29_20260823_1718.csv`, so identity can be verified
+before a rerun. The harmonised nine-layer evidence table and the complete
+benchmark outputs are released in full in `results/`.
 
 ## Licence
 
-Code is released under the MIT licence. Third-party inputs remain under their
-originators' terms.
+MIT (see `LICENSE`).
