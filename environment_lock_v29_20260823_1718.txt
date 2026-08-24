@@ -1,0 +1,34 @@
+# ===========================================================================
+# ENVIRONMENT LOCK — PDAC evidence-integration audit
+# Version stamp: v29_20260823_1718
+#
+# Produced from repository/requirements.txt (declared pins) plus the pinned
+# Python interpreter. For a fully-resolved transitive lock, run
+#   pip freeze > environment_lock_full_<stamp>.txt
+# inside the activated venv AFTER the clean rerun, and record the resulting
+# commit SHA alongside it (see REPRODUCIBILITY_v29_20260823_1718.md).
+#
+# Runtime profile (from input_manifest.json -> environment):
+#   python        3.11.9
+#   platform      macOS-26.5.2-x86_64-i386-64bit (Darwin 25.5.0), x86_64
+#   compute       CPU-only, single-threaded apart from BLAS. No GPU.
+#   network       none required at run time.
+# ===========================================================================
+
+python==3.11.9
+
+cycler==0.12.1
+joblib==1.5.3
+kiwisolver==1.5.0
+matplotlib==3.11.1
+numpy==1.26.4
+pandas==2.3.3
+pillow==12.2.0
+scikit-learn==1.9.0
+scipy==1.17.1
+threadpoolctl==3.6.0
+
+# NOTE: The above are the declared/verified pins. A complete `pip freeze`
+# output (including transitive dependencies resolved for the exact platform)
+# should be captured at rerun time and committed next to this file so the
+# environment is byte-for-byte reproducible.
