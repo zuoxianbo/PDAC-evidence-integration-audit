@@ -1,0 +1,22 @@
+{
+  "seed": 20260819,
+  "n_boot": 2000,
+  "figures": {
+    "Fig1_v34.png": "22c019a066fc97c116f9222d21f8404f090c1a2b6af021707fa82ac9536dfb45",
+    "Fig2_v34.png": "5ce9f133a390f2e27f6b1159f176910da001ea62ca0c056dbd72ed0450196c41",
+    "Fig3_v34.png": "fcbf9fe21ae029ea593fcfc6a01d5ef8954959947cdc03cb1ae45056e2a69200",
+    "Fig4_v34.png": "ba0dbb27db2f51585e4a0facc3694e729b54a12929d37538fdad540c2033899b",
+    "Fig5_v34.png": "6ecd6d0d364029331d620636f55cc55ebb925e53ebf572e0918725fcb05d5355",
+    "Fig6_v34.png": "6f3d8c1edda7106465a1a2bb040cca3d7345fe0d7ad2be6d9dc21718acd00c4d"
+  },
+  "results_artefacts": {
+    "v18_ncs_results.json": "29ca38ffeff3f9169c4901a347b83bb2c594427cc919ce520eb12c591bffc57e",
+    "v18_sentinel_audit.json": "054f345e73dd9dfbfebb528109bb1b681e50957bedea5a1812c9d59b98be0f8d",
+    "v18_source_data.csv": "704033f27df05103fc10755690dbf7445969b593b621eac79f099fde8b061dec"
+  },
+  "code": {
+    "v18_recompute.py": "2f0497379287b38bccb02e497e97d8fdb252c25f1353995bc5457a2bb5348728",
+    "v18_figures_v34.py": "4d7af1273ecc9c074e1fd48673c2f1543db3a2d69abd2c20abf1853a2ebd85b5",
+    "verify_v34.py": "d31c2bb34a0edbf54e07b51a7670f9016bb58b5ee57e939becdb97424fd35218"
+  }
+}
