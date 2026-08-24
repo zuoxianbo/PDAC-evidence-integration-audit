@@ -9,27 +9,42 @@ headline result is negative: fixed-form integration outperforms the strongest
 single layer (network centrality) only on endpoints whose labels embed an
 input layer.
 
-## Reproducibility status
+## Reproducibility status (v34)
 
 A **from-scratch clean rerun has been executed** and reproduces every number
-in the manuscript to six decimals. See `run_record_v32_20260824.txt` for the
-git commit SHA and results-manifest SHA-256. Verification summary:
+in the manuscript to six decimals. The frozen v34 commit records the git SHA and
+the results-manifest SHA-256 in `results/verify_v34_manifest.json`, produced by the
+one-command gate `python code/verify_v34.py`. Verification summary:
 
-- 104 benchmark cells (13 scorers × 8 endpoints): maximum absolute difference 0.0
+- 104 benchmark cells (12 scorers × 7 named + E6 endpoints): maximum absolute difference 0.0
 - All headline AUROC/CI, negative controls, functional forms: identical
-- Dirichlet weight space (1,000 draws): bit-identical
+- E6 Random-forest AUROC = 0.9134 (verified against `v18_source_data.csv`)
+- Sentinel audit S3: support-mean Φ(E3) = 0.889, without-druggability(E3) = 0.535,
+  E3-A harmonic ≡ E1 harmonic (bit-identical taxonomy)
+- Every `figures/Fig*_v34.png` is SHA-256 recorded and re-checked on each run
+
+Run `python code/verify_v34.py` to re-run the full integrity gate (stdlib only,
+no third-party packages required).
 
 ## Layout
 
 ```
 code/                     analysis scripts, in execution order
-results/                  machine-readable outputs (v18_*.json / csv)
-figures/                  the six display items (PNG + PDF, 400 dpi)
+  v18_recompute.py            endpoint taxonomy + 12×endpoint benchmark, CI, MWU, DeLong, Δ-CI
+  v18_sentinel_audit.py       missing-data sentinel & combination-rule audit (S1–S4)
+  v18_figures_v34.py          the six Nature display items (Fig1–6_v34, PNG+PDF)
+  v18_ed_figures_v32_20260824.py  Extended Data Figures 1-4
+  verify_v34.py               one-command reproducibility & integrity gate (stdlib only)
+results/                  machine-readable outputs (v18_*.json / csv) + verify_v34_manifest.json
+figures/                  the six display items (Fig1–6_v34.png + .pdf, 400 dpi)
 extended_data/            Extended Data Figures 1-4 (PNG + PDF)
 supplementary/            Supplementary Tables 1-5 + source data
 submission_materials/     cover letter, author contributions, competing interests
+AUDIT_v34.md              last-pass audit of the 5 submission-critical routines
+STATS_v34.md              final statistical & methodological consistency check
+FIGCHECKLIST_v34.md       per-figure Nature production-grade checklist
+REPRODUCIBILITY_v34.md    reproducibility protocol & provenance
 manuscript.md / .docx     the final manuscript
-run_record_v32_20260824.txt   clean-rerun provenance record
 ```
 
 ## Reproducing
@@ -37,11 +52,12 @@ run_record_v32_20260824.txt   clean-rerun provenance record
 ```bash
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python code/v18_recompute.py         # 8-endpoint benchmark -> results/v18_ncs_results.json
+python code/v18_recompute.py         # endpoint taxonomy + 12×endpoint benchmark -> results/v18_ncs_results.json
 python code/v18_weightspace.py       # Dirichlet weight space -> results/v18_weight_space.json
 python code/v18_sentinel_audit.py    # sentinel / combination-rule audit -> results/v18_sentinel_audit.json
-python code/v18_figures_v32_20260824.py      # 6 display items
+python code/v18_figures_v34.py        # 6 Nature display items -> figures/Fig1–6_v34.png/.pdf
 python code/v18_ed_figures_v32_20260824.py   # 4 Extended Data figures
+python code/verify_v34.py             # one-command integrity gate -> results/verify_v34_manifest.json
 ```
 
 For large-memory-constrained environments, `code/rerun_segmented.py`
