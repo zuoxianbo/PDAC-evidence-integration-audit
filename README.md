@@ -12,7 +12,7 @@ input layer.
 ## Reproducibility status
 
 A **from-scratch clean rerun has been executed** and reproduces every number
-in the manuscript to six decimals. See `run_record_v31_20260824.txt` for the
+in the manuscript to six decimals. See `run_record_v32_20260824.txt` for the
 git commit SHA and results-manifest SHA-256. Verification summary:
 
 - 104 benchmark cells (13 scorers × 8 endpoints): maximum absolute difference 0.0
@@ -29,7 +29,7 @@ extended_data/            Extended Data Figures 1-4 (PNG + PDF)
 supplementary/            Supplementary Tables 1-5 + source data
 submission_materials/     cover letter, author contributions, competing interests
 manuscript.md / .docx     the final manuscript
-run_record_v31_20260824.txt   clean-rerun provenance record
+run_record_v32_20260824.txt   clean-rerun provenance record
 ```
 
 ## Reproducing
@@ -40,8 +40,8 @@ pip install -r requirements.txt
 python code/v18_recompute.py         # 8-endpoint benchmark -> results/v18_ncs_results.json
 python code/v18_weightspace.py       # Dirichlet weight space -> results/v18_weight_space.json
 python code/v18_sentinel_audit.py    # sentinel / combination-rule audit -> results/v18_sentinel_audit.json
-python code/v18_figures_v31_20260823_1830.py      # 6 display items
-python code/v18_ed_figures_v31_20260823_1830.py   # 4 Extended Data figures
+python code/v18_figures_v32_20260824.py      # 6 display items
+python code/v18_ed_figures_v32_20260824.py   # 4 Extended Data figures
 ```
 
 For large-memory-constrained environments, `code/rerun_segmented.py`
@@ -54,7 +54,7 @@ by the 2,000-resample bootstrap confidence intervals. No network access is
 required at run time; no GPU is used.
 
 Environment: Python 3.11.9, numpy 1.26.4, scipy 1.17.1, scikit-learn 1.9.0
-(`environment_lock_v29_20260823_1718.txt`).
+(`environment_lock_v32_20260824.txt`).
 
 ## Inputs
 
@@ -62,10 +62,26 @@ Third-party inputs (DepMap 23Q2, GDSC/CCLE, STRING v12.0, COSMIC, gnomAD,
 IMPC, Open Targets Genetics, Human Protein Atlas, ClinicalTrials.gov) are
 **not redistributed** here because they are governed by their originators'
 licences. Each is identified by SHA-256 and byte size in
-`final_input_manifest_v29_20260823_1718.csv`, so identity can be verified
-before a rerun. The harmonised nine-layer evidence table and the complete
-benchmark outputs are released in full in `results/`.
+`final_input_manifest_v32_20260824.csv`, so identity can be verified before a
+rerun. The harmonised nine-layer evidence table and the complete benchmark
+outputs are released in full in `results/`.
+
+## Endpoint taxonomy
+
+| id | endpoint | label source | external to the evidence base |
+|---|---|---|---|
+| E1 | pan-dependency | DepMap 23Q2 PDAC CRISPR | yes |
+| E2 | PDAC-enriched dependency | top quartile of B_zeffect within E1 | yes, but nested in E1 |
+| E3 | conjunctive actionability | E1 positives that are also druggable | **no** - uses the druggability input layer |
+| E3-A | leakage-controlled essentiality | E1 with the druggability conjunct removed | yes - and numerically identical to E1 |
+| E3-C | out-of-evidence druggability | the druggability layer itself | **no** - the label is an input |
+| E4 | CRC zero-shot transfer | DepMap 23Q2 colorectal CRISPR | yes |
+| E5 | historical clinical-target concordance | agents in PDAC clinical development | yes |
+| E6 | PDAC drug-response actionability | GDSC IC50 in 29 pancreatic lines | yes |
+
+E3 and E3-C are retained deliberately: they are the two endpoints on which
+integration appears to succeed, and the audit shows why.
 
 ## Licence
 
-MIT (see `LICENSE`).
+MIT (see `LICENSE`). Third-party inputs remain under their originators' terms.
