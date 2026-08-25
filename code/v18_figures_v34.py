@@ -95,9 +95,11 @@ def save(fig, name):
 
 def panel(ax, letter, external=False):
     if external:
-        # place the panel letter ABOVE the axes (outside the plotting area)
-        ax.text(-0.02, 1.05, letter, transform=ax.transAxes, fontsize=9,
-                fontweight="bold", va="bottom", ha="left", color=INK,
+        # place the panel letter OUTSIDE the axes, top-left corner, clear of any
+        # in-axes content and clear of a left-aligned panel title (right-aligned
+        # just left of the axes edge).
+        ax.text(-0.03, 1.03, letter, transform=ax.transAxes, fontsize=9,
+                fontweight="bold", va="bottom", ha="right", color=INK,
                 clip_on=False)
     else:
         ax.text(0.015, 0.965, letter, transform=ax.transAxes, fontsize=9,
@@ -105,10 +107,11 @@ def panel(ax, letter, external=False):
 
 
 def below_legend(ax, handles, ncol=2, y=-0.26, labels=None, loc="lower center",
-                 handlelength=1.2, columnspacing=1.0, fontsize=6):
+                 handlelength=1.2, columnspacing=1.0, fontsize=6, frameon=False):
     ax.legend(handles=handles, labels=labels, loc=loc,
               bbox_to_anchor=(0.5, y), ncol=ncol, handlelength=handlelength,
-              columnspacing=columnspacing, fontsize=fontsize)
+              columnspacing=columnspacing, fontsize=fontsize, frameon=frameon,
+              edgecolor=INK, fancybox=False, borderpad=0.5)
 
 
 # =====================================================================
@@ -120,7 +123,7 @@ def fig1():
     eps = ["E1 pan-dependency", "E3 conjunctive actionability",
            "E5 historical clinical-target concordance"]
     fig = plt.figure(figsize=(W2, 84 * MM))
-    gs = fig.add_gridspec(1, 2, width_ratios=[1.4, 1.0], wspace=0.34)
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.3, 1.1], wspace=0.34)
     fig.subplots_adjust(bottom=0.30, top=0.93)
 
     # (a) single-layer magnitude
@@ -174,29 +177,29 @@ def fig1():
     hdr(3.9, 9.55, "Nested / duplicated", C_NEU)
     hdr(7.2, 9.55, "Constructed / circular", C_CIRC)
 
-    # external-label (blue) -- 4 boxes; compact multi-line text + smaller font
-    # so the label stays INSIDE the box (no overflow)
-    box(0.4, 6.9, 3.05, 2.0, "E1 pan-dependency\n(n = %d)" % npos("E1 pan-dependency"),
-        C_CENT, fs=5.4)
-    box(0.4, 5.05, 3.05, 1.55, "E4 CRC zero-shot\n(n = %d)" % npos("E4 CRC zero-shot transfer"),
+    # external-label (blue) -- 4 boxes; short lines + wide boxes so the label
+    # stays fully inside each box (no overflow, no box-to-box overlap)
+    box(0.4, 6.9, 3.3, 1.5, "E1 pan-dependency\n(n = %d)" % npos("E1 pan-dependency"),
         C_CENT, fs=4.8)
-    box(0.4, 3.25, 3.05, 1.5, "E5 historical\nclinical-target\nconcordance (n = %d)"
-        % npos("E5 historical clinical-target concordance"), C_CENT, fs=4.6)
-    box(0.4, 1.5, 3.05, 1.5, "E6 PDAC drug-\nresponse proxy\n(n = %d)"
-        % npos("E6 PDAC drug-response actionability"), C_CENT, fs=4.6)
+    box(0.4, 5.0, 3.3, 1.5, "E4 CRC zero-shot\n(n = %d)" % npos("E4 CRC zero-shot transfer"),
+        C_CENT, fs=4.8)
+    box(0.4, 2.9, 3.3, 1.7, "E5 historical\ntarget\nconcordance (n = %d)"
+        % npos("E5 historical clinical-target concordance"), C_CENT, fs=4.8)
+    box(0.4, 1.0, 3.3, 1.5, "E6 drug-response\nproxy (n = %d)"
+        % npos("E6 PDAC drug-response actionability"), C_CENT, fs=4.8)
 
-    # nested (grey) -- compact multi-line text, no overflow
-    box(3.9, 5.3, 2.95, 3.5, "E2 PDAC-enriched\n(top quartile of E1)\n"
-        "(n = %d) nested in E1" % npos("E2 PDAC-enriched dependency"), C_NEU, fs=4.6)
-    box(3.9, 1.5, 2.95, 3.3, "E3-A leakage-\ncontrolled \u2261 E1\n(n = %d); drop\n"
-        "Druggability\n\u2192 E1 exactly" % npos("E3-A leakage-controlled essentiality"),
-        C_NEU, fs=4.3)
+    # nested (grey) -- short lines, taller boxes
+    box(3.9, 5.6, 3.1, 2.6, "E2 PDAC-enriched\ntop quartile of E1\n(n = %d)\n"
+        "nested in E1" % npos("E2 PDAC-enriched dependency"), C_NEU, fs=4.4)
+    box(3.9, 1.6, 3.1, 3.5, "E3-A leakage-\ncontrolled \u2261 E1\n(n = %d)\n"
+        "drop Druggability\n\u2192 E1 exactly" % npos("E3-A leakage-controlled essentiality"),
+        C_NEU, fs=4.4)
 
-    # constructed / circular (purple) -- compact multi-line text, no overflow
-    box(7.2, 5.3, 2.7, 3.5, "E3 essential-\nand druggable\n(E1 \u2229 druggable)\n"
-        "(n = %d); circular" % npos("E3 conjunctive actionability"), C_CIRC, fs=4.4)
-    box(7.2, 1.5, 2.7, 3.3, "E3-C tractability\nas label\n(n = %d)"
-        % npos("E3-C out-of-evidence druggability"), C_CIRC, fs=4.6)
+    # constructed / circular (purple) -- short lines, taller boxes
+    box(7.2, 5.6, 2.75, 2.6, "E3 essential-\nand druggable\n(E1 \u2229 drugg.)\n"
+        "(n = %d)\ncircular" % npos("E3 conjunctive actionability"), C_CIRC, fs=4.2)
+    box(7.2, 3.4, 2.75, 1.7, "E3-C tractability\nas label\n(n = %d)"
+        % npos("E3-C out-of-evidence druggability"), C_CIRC, fs=4.4)
 
     ax2.text(5.0, -0.25, "Blue: external-label endpoints  \u00b7  Grey: nested / duplicated"
              "  \u00b7  Purple: constructed / circular diagnostics",
@@ -368,7 +371,7 @@ def fig4():
     ax.text(0.5, -0.22, "mean across 9 layers = %.1f%% of genes unannotated"
             % mean_pct, transform=ax.transAxes, ha="center", va="top",
             fontsize=5.0, color=INK)
-    panel(ax, "a")
+    panel(ax, "a", external=True)
 
     # (b) multiplicative rule sign-flip partition
     ax = fig.add_subplot(gs[0, 1])
@@ -408,7 +411,7 @@ def fig4():
                   Patch(fc="#E6E0F0", ec=C_CIRC)],
                  labels=["concordant", "sign-flip", "double-negative"],
                  ncol=3, y=-0.30, fontsize=5.4)
-    panel(ax, "b")
+    panel(ax, "b", external=True)
 
     # (c) effect of removing the label-embedded layer
     ax = fig.add_subplot(gs[0, 2])
@@ -437,7 +440,7 @@ def fig4():
                  [Patch(fc=C_CIRC, ec="none"), Patch(fc=C_NEU, ec="none")],
                  labels=["full support (incl. tractability)", "after tractability "
                          "deletion"], ncol=1, y=-0.34, fontsize=5.6)
-    panel(ax, "c")
+    panel(ax, "c", external=True)
     save(fig, "Fig4")
 
 
@@ -470,7 +473,8 @@ def fig5():
     handles = [Patch(fc=c, ec="none") for c in shades]
     ax.legend(handles=handles, labels=forms, loc="lower center",
               bbox_to_anchor=(0.5, -0.36), ncol=3, handlelength=1.0,
-              columnspacing=0.9, fontsize=5.4)
+              columnspacing=0.9, fontsize=5.4, frameon=True, edgecolor=INK,
+              fancybox=False, borderpad=0.5)
     panel(ax, "a")
 
     # (b) weight space ECDF
@@ -498,7 +502,7 @@ def fig5():
                          "prespecified %.3f" % WS["v17_chosen_weighting_auroc_e3"],
                          "2.5 / 97.5 pct",
                          "median %.3f (IQR %.3f\u2013%.3f)" % (med, q25, q75)],
-                 ncol=2, y=-0.40, fontsize=5.0)
+                 ncol=2, y=-0.40, fontsize=5.0, frameon=True)
     panel(ax, "b")
 
     # (c) negative controls (observed ECS: black text, not coloured)
@@ -547,7 +551,7 @@ def fig5():
     below_legend(ax,
                  [Patch(fc=C_NEU, ec="none"), Patch(fc=C_CENT, ec="none")],
                  labels=["sentinel = \u22123", "available-case mean"], ncol=1, y=-0.38,
-                 fontsize=5.4)
+                 fontsize=5.4, frameon=True)
     panel(ax, "d")
     save(fig, "Fig5")
 
@@ -602,7 +606,7 @@ def fig6():
             fontsize=7, color=INK)
     ax.text(5.0, -0.3, "IC50-derived labels are external to the nine-layer evidence matrix",
             ha="center", fontsize=5.2, color=INK)
-    panel(ax, "a")
+    panel(ax, "a", external=True)
 
     # (b) E6 AUROC comparison (RF = 0.913 kept verbatim from source data)
     ax = fig.add_subplot(gs[0, 1])
@@ -628,7 +632,7 @@ def fig6():
     ax.set_xlim(0.30, 1.06)
     ax.set_xlabel("AUROC on E6 (GDSC drug response)")
     ax.set_title("Pharmacological stress test (E6)", fontsize=7.5, loc="left")
-    panel(ax, "b")
+    panel(ax, "b", external=True)
     save(fig, "Fig6")
 
 
