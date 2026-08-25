@@ -158,3 +158,16 @@ panel. All applied and re-rendered (`verify_v34.py` re-baselined → PASS).
 
 Open item carried forward: final **human/multimodal** visual gate at print size (current
 model cannot read raster images) — confirm no residual overlap in Fig.1–6 + ED_Fig.1–4 PDFs.
+
+## Round 5 — re-check & fixes (2026-08-25, third blind layout pass)
+
+Author visual feedback (fourth pass): Fig.4 a/b/c panels overlap; Fig.5 bottom legends
+still overlap. Re-rendered (`verify_v34.py` re-baselined → PASS).
+
+| Fig | Issue reported | Fix applied |
+|-----|----------------|-------------|
+| 4 a/b/c | panels overlapped | gridspec `wspace` 0.48 → 0.62 (panels pulled apart); over-long panel titles shortened so they no longer spill into the neighbouring panel — (b) "Multiplicative rule is not order-preserving" → **"Multiplicative rule is not monotone"** and the redundant sub-caption "Additional evidence can lower the score." removed; (c) "Effect of removing the label-embedded layer" → **"Removing the label-embedded layer"** |
+| 5 a/b/d | bottom legends overlapped | `wspace` 0.52 → 0.62 and bottom margin 0.40 → 0.46; legends moved lower and compacted — (a) y −0.36→−0.44 (borderpad 0.5→0.4), (b) y −0.40→−0.46 with shortened labels ("STRING alone 0.738"→"STRING 0.738"; "median 0.288 (IQR 0.251–0.365)"→"median 0.288 (IQR 0.25–0.37)"), (d) y −0.38→−0.44 |
+
+Open item carried forward: final **human/multimodal** visual gate at print size (current
+model cannot read raster images) — confirm no residual overlap in Fig.1–6 + ED_Fig.1–4 PDFs.
