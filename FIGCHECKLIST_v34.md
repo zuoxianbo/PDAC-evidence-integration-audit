@@ -230,3 +230,30 @@ crossed the AUROC digits of E2 / E3 / E3-C / E4. Fix: separators moved to column
 **boundaries** x = 0.5, 2.5, 4.5 (lw 1.2 pt #999999, zorder=4), and every cell value
 and "n.a." text raised to zorder=10 so no digit can ever be masked. Re-rendered
 (`verify_v34.py` → PASS).
+
+## Round 11 — NCS_v34 图片专项意见 / 投稿前 QA (2026-08-25)
+
+Full line-by-line application of `NCS_v34_最终修订文档_图片专项意见_投稿前QA.docx`.
+Data re-verified against frozen JSONs: E1 centrality **0.695** / E1 RF **0.750** /
+E3 harmonic **0.893** / E3 centrality **0.738** / E4 centrality **0.702** / E5 harmonic
+**0.941** / E6 centrality **0.910** / E6 RF **0.913**; Fig.4b quadrants **57.8% / 26.2%**;
+Fig.4c **0.889→0.535 / 0.968→0.534**; sentinel **−3.0** (all match; the doc's lone
+"+0.241" has no exact match in source — flagged as a doc typo, not blocking).
+
+Figure changes:
+
+| Fig | Priority | Change |
+|-----|----------|--------|
+| 1 | P1 | panel-a title → "Single evidence layers (endpoints E1, E3, E5)"; panel-b group-header font 4.6→5.0 (single-row, equal spacing); removed the redundant bottom colour-semantics line |
+| 2 | P0 | separator lw 1.2→**0.8 pt** (≤1 pt, no digit masking); caption → "six primary endpoints: E1, E3, E3-C, E4, E5 and E6 (E2 is nested in E1 and E3-A reproduces E1)" |
+| 5 | P1 | legend "2.5 / 97.5 pct" → "**2.5th / 97.5th pct**" |
+| 6 | P0 | added bottom caption "All evaluated scorers on E6 (pharmacological-response proxy): STRING centrality, Druggability, fixed-form integration (harmonic, arithmetic, rank-aggregation, ECS) and supervised learners (random forest, logistic regression, elastic net)"; RF=0.913 confirmed |
+
+Manuscript P0 (docx): dropped "independent" from the two "six were treated as
+independent primary endpoints" sentences + E2's "independent primary endpoint";
+E6 Results synced RF=0.913 ("…0.780 for tractability alone, whereas the random-forest
+learner reached 0.913, slightly above centrality (Fig. 6)"); citation-content fix —
+STRING 22→23, TCGA-PAAD 23–24→22,24, COSMIC Cancer Gene Census 23→24 (superscript
+runs preserved); Introduction dropped premature Ref.21 ("1–2,15–16,21"→"1–2,15–16").
+
+Re-rendered; `verify_v34.py` → PASS.
