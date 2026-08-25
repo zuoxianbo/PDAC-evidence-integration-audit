@@ -22,7 +22,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
+from matplotlib.colors import LinearSegmentedColormap, Normalize
 from matplotlib.patches import Patch, Rectangle, FancyBboxPatch
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -235,7 +235,7 @@ def fig2():
     fig, ax = plt.subplots(figsize=(W2, 88 * MM))
     fig.subplots_adjust(left=0.20, bottom=0.28, right=0.90, top=0.95)
     CMAP = LinearSegmentedColormap.from_list("azure", ["#F5F5F5", "#BFD8EA", C_CENT])
-    norm = TwoSlopeNorm(vmin=0.30, vcenter=0.5, vmax=1.0)
+    norm = Normalize(vmin=0.30, vmax=1.0)
     im = ax.imshow(M, cmap=CMAP, norm=norm, aspect="auto")
 
     circ_cols = [j for j, e in enumerate(eps) if e in
@@ -277,12 +277,10 @@ def fig2():
     cb.set_label("AUROC", fontsize=6.5)
     cb.ax.tick_params(labelsize=5.5)
     cb.outline.set_linewidth(0.4)
-    handles = [Patch(fc=C_CENT, ec="none"), Patch(fc=C_INT, ec="none"),
-               Patch(fc=C_RF, ec="none"), Patch(fc=C_NEU, ec="none"),
-               Patch(fc=C_CIRC, ec="none")]
-    labels = ["centrality / single-layer", "fixed-form integration",
-              "supervised learner", "other single layer", "constructed/circular"]
-    below_legend(ax, handles, labels=labels, ncol=5, y=-0.22, fontsize=5.4)
+    below_legend(ax,
+                 [Patch(fc="#F3EFF8", ec=C_CIRC)],
+                 labels=["constructed / circular (E3, E3-C)"],
+                 ncol=1, y=-0.22, fontsize=5.4)
     ax.text(0.5, -0.36, "8 operational endpoints; six primary endpoints: "
             "E1, E3, E3-C, E4, E5 and E6 (E2 is nested in E1 and E3-A "
             "reproduces E1). Purple columns = constructed/circular "
