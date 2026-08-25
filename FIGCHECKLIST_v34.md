@@ -116,5 +116,28 @@ Fig.6b panel letter sat on the bars. All fixed in `v18_figures_v34.py` and re-re
 | 6b | panel letter "b" drawn on the bars | `panel(ax,"b", external=True)` → letter moved **above** the axes (off the graphic) |
 | 1/2/3/4/5/6 | general label crowding | figures made taller; margins increased; re-verified with `verify_v34.py` (PASS, new figure hashes) |
 
+## Round 3 — re-check & fixes (2026-08-25, blind layout pass)
+
+Author visual feedback (second pass): Fig.1b text overflows its box; Fig.3b text overlaps
+the graphic; Fig.4a callout texts overlap the bars; Fig.5b in-panel median/IQR text overlaps
+the ECDF and its bottom legend is crowded; Fig.6b panel letter "b" overlaps the title;
+ED Fig.3d annotation overlaps the histogram. All addressed by moving text out of the
+plotting area / shrinking fonts / adding a white mask, then re-rendered; `verify_v34.py`
+re-baselined (PASS, new figure hashes).
+
+| Fig | Issue reported | Fix applied |
+|-----|----------------|-------------|
+| 1b | text overflowed the endpoint boxes | default box font 5.0→4.6 pt; every long label re-broken into ≤17-char lines (E5/E6 → 3 lines, E2/E3-A → 3–5 lines, E3 → 4 lines); external boxes widened 2.9→3.05; the `⊂` glyph (missing in Arial) replaced with spelled "nested in E1" |
+| 3b | stats text overlapped the vertical line | moved from bottom-left (0.08, 0.04) to top-right (0.97, 0.93), ha=right — clear of the centred line and the "b" letter |
+| 4a | callout texts overlapped the bars / per-bar % labels | both in-axes callouts removed; "mean across 9 layers = 57.8% of genes unannotated" now a compact below-panel caption (xlim 110→118 for margin) |
+| 5b | in-panel median/IQR text overlapped the ECDF; bottom legend crowded | in-axes text removed and merged into the panel legend (ncol 1→2, 4th entry "median (IQR)"); Fig.5 bottom margin 0.36→0.40 |
+| 6b | panel letter "b" overlapped the title | `panel(ax,"b", external=True)` reverted to internal `panel(ax,"b")` → letter sits top-left, parallel to "a", clear of the title |
+| ED_Fig3d | annotation overlapped the histogram / reference lines | annotation moved to the top-right corner with a white `bbox` mask (no visual overlap); panel-d legend lowered to y=-0.34 for clearance from the figure caption |
+
+Tables: `supplementary_tables_v34.md` cross-checked against `v18_ncs_results.json` /
+`v18_sentinel_audit.json` / `v18_weight_space.json` — all AUROC, 95% CIs, sentinel %,
+support-term, and weight-space stats (91.2% < chance, 3.2% > centrality) match; no
+discrepancies found.
+
 Open item carried forward: final **human/multimodal** visual gate at print size (current
-model cannot read raster images) — confirm no residual overlap in Fig.1–6 PDFs.
+model cannot read raster images) — confirm no residual overlap in Fig.1–6 + ED_Fig.1–4 PDFs.
