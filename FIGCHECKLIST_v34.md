@@ -221,3 +221,12 @@ source/manuscript.
 | 5 | IQR = 0.251–0.365 | IQR legend label back to 3 decimals ("median 0.288 (IQR 0.251–0.365)") |
 
 Re-rendered (`verify_v34.py` → PASS).
+
+## Round 10 — Fig.2 separator position fix (2026-08-25)
+
+Root cause: the Fig.2 group separators were drawn at x = 1.0, 3.0, 5.0 — these are
+column **centers** (endpoint columns sit at integer x = 0…7), so even a thin line
+crossed the AUROC digits of E2 / E3 / E3-C / E4. Fix: separators moved to column
+**boundaries** x = 0.5, 2.5, 4.5 (lw 1.2 pt #999999, zorder=4), and every cell value
+and "n.a." text raised to zorder=10 so no digit can ever be masked. Re-rendered
+(`verify_v34.py` → PASS).
