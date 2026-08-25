@@ -16,12 +16,13 @@ What it checks
      - Sentinel audit: support-mean PHI(E3)=0.889,
        support-mean-without-druggability(E3)=0.535,
        E3-A harmonic == E1 harmonic (bit-identical taxonomy)  (v18_sentinel_audit.json)
-3. Figure integrity: SHA-256 of every figures/Fig*_v34.png is recorded on the
-   first run and compared on every later run. Any mismatch (or a missing
-   figure) FAILS the gate, so a re-run that silently changes a panel is caught.
-4. Artefact manifest: SHA-256 of the three results JSON + the two code files
-   (v18_recompute.py, v18_figures_v34.py) is written to
-   results/verify_v34_manifest.json for provenance.
+3. Figure integrity: SHA-256 of every figures/Fig*_v34.png AND every
+   extended_data/ED_Fig*_v34.png is recorded on the first run and compared on
+   every later run. Any mismatch (or a missing figure) FAILS the gate, so a
+   re-run that silently changes a panel is caught.
+4. Artefact manifest: SHA-256 of the three results JSON + the code files
+   (v18_recompute.py, v18_figures_v34.py, v18_ed_figures_v34.py, verify_v34.py)
+   is written to results/verify_v34_manifest.json for provenance.
 
 Usage
 -----
@@ -42,6 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 RES = os.path.join(REPO, "results")
 FIG = os.path.join(REPO, "figures")
+EDF = os.path.join(REPO, "extended_data")
 MANIFEST = os.path.join(RES, "verify_v34_manifest.json")
 
 # tolerance for float comparisons
@@ -168,6 +170,26 @@ def main():
                    prev is not None and prev == h,
                    "matches previous" if (prev == h) else "MISMATCH vs recorded")
 
+    # ---- 3b. Extended Data figure integrity (SHA-256) -----------------
+    ed_hashes = {}
+    for i in range(1, 5):
+        p = os.path.join(EDF, f"ED_Fig{i}_v34.png")
+        if os.path.exists(p):
+            ed_hashes[f"ED_Fig{i}_v34.png"] = sha256(p)
+        else:
+            record(f"ED_Fig{i}_v34_present", False, "file missing")
+
+    ed_prev = manifest.get("extended_data", {})
+    if not ed_prev:
+        record("ed_figure_hash_recorded", True,
+               "first run — Extended Data hashes written")
+    else:
+        for name, h in ed_hashes.items():
+            prev = ed_prev.get(name)
+            record(f"ed_figure_hash_{name}",
+                   prev is not None and prev == h,
+                   "matches previous" if (prev == h) else "MISMATCH vs recorded")
+
     # ---- 4. artefact manifest (JSON + code) --------------------------
     artefact_files = [
         "v18_ncs_results.json",
@@ -179,16 +201,20 @@ def main():
         p = os.path.join(RES, fn)
         if os.path.exists(p):
             artefact_hashes[fn] = sha256(p)
-    code_hashes = {
-        "v18_recompute.py": sha256(os.path.join(HERE, "v18_recompute.py")),
-        "v18_figures_v34.py": sha256(os.path.join(HERE, "v18_figures_v34.py")),
-        "verify_v34.py": sha256(os.path.join(HERE, "verify_v34.py")),
-    }
+    code_hashes = {}
+    for cf in ("v18_recompute.py", "v18_figures_v34.py",
+               "v18_ed_figures_v34.py", "verify_v34.py"):
+        p = os.path.join(HERE, cf)
+        if os.path.exists(p):
+            code_hashes[cf] = sha256(p)
+        else:
+            record(f"code_present_{cf}", False, "file missing")
 
     new_manifest = {
         "seed": 20260819,
         "n_boot": 2000,
         "figures": fig_hashes,
+        "extended_data": ed_hashes,
         "results_artefacts": artefact_hashes,
         "code": code_hashes,
     }
@@ -202,7 +228,10 @@ def main():
     for name, ok, detail in checks:
         print(f"  [{'PASS' if ok else 'FAIL'}] {name:<40s} {detail}")
     print("-" * 64)
-    print(f"  figures hashed : {len(fig_hashes)}")
+    print(f"  main figures hashed     : {len(fig_hashes)}")
+    print(f"  Extended Data hashed    : {len(ed_hashes)}")
+    print(f"  results artefacts hashed: {len(artefact_hashes)}")
+    print(f"  code files hashed       : {len(code_hashes)}")
     print(f"  manifest       : {MANIFEST}")
     print("=" * 64)
     if fails:
