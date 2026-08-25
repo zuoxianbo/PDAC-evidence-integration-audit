@@ -141,3 +141,20 @@ discrepancies found.
 
 Open item carried forward: final **human/multimodal** visual gate at print size (current
 model cannot read raster images) — confirm no residual overlap in Fig.1–6 + ED_Fig.1–4 PDFs.
+
+## Round 4 — re-check & fixes (2026-08-25, second blind layout pass)
+
+Author visual feedback (third pass): Fig.1b still overflows/overlaps; Fig.4 a/b/c
+panel letters should sit outside the panel (top-left, off the graphic); Fig.5 bottom
+legends should be visually separated; Fig.6 a/b panel letters should sit outside the
+panel. All applied and re-rendered (`verify_v34.py` re-baselined → PASS).
+
+| Fig | Issue reported | Fix applied |
+|-----|----------------|-------------|
+| 1b | box text still overflowed / boxes overlapped | every label re-broken to ≤17-char lines ("concordance (n = N)" / "top quartile of E1" / "drop Druggability" split); external boxes widened 3.05→3.3, nested 2.95→3.1, constructed 2.7→2.75; box heights + vertical gaps re-spaced (E1/E4/E5/E6 at y 6.9/5.0/2.9/1.0, nested E2/E3-A at 5.6/1.6, constructed E3/E3-C at 5.6/3.4); Fig.1 width ratio 1.4:1.0 → 1.3:1.1 (b panel wider) |
+| 4 a/b/c | panel letters sat inside the axes | `panel(ax, letter, external=True)` — letter now outside top-left (right-aligned just left of axes edge, y=1.03), clear of in-axes content and clear of the left-aligned panel title |
+| 5 a/b/d | bottom legends crowded / no boundary | each legend given a border (`frameon=True, edgecolor=INK, fancybox=False, borderpad=0.5`) — a/b/d legends are now boxed and distinct |
+| 6 a/b | panel letters sat inside the axes | `panel(ax, "a"/"b", external=True)` — letters moved outside the panel top-left |
+
+Open item carried forward: final **human/multimodal** visual gate at print size (current
+model cannot read raster images) — confirm no residual overlap in Fig.1–6 + ED_Fig.1–4 PDFs.
