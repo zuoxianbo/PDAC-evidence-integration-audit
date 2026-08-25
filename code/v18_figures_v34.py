@@ -93,9 +93,15 @@ def save(fig, name):
     print(f"  wrote {name}_{STAMP}.png / .pdf")
 
 
-def panel(ax, letter):
-    ax.text(0.015, 0.965, letter, transform=ax.transAxes, fontsize=9,
-            fontweight="bold", va="top", ha="left", color=INK)
+def panel(ax, letter, external=False):
+    if external:
+        # place the panel letter ABOVE the axes (outside the plotting area)
+        ax.text(-0.02, 1.05, letter, transform=ax.transAxes, fontsize=9,
+                fontweight="bold", va="bottom", ha="left", color=INK,
+                clip_on=False)
+    else:
+        ax.text(0.015, 0.965, letter, transform=ax.transAxes, fontsize=9,
+                fontweight="bold", va="top", ha="left", color=INK)
 
 
 def below_legend(ax, handles, ncol=2, y=-0.26, labels=None, loc="lower center",
@@ -113,9 +119,9 @@ def fig1():
               "Genetic constraint", "Cancer-driver annotation"]
     eps = ["E1 pan-dependency", "E3 conjunctive actionability",
            "E5 historical clinical-target concordance"]
-    fig = plt.figure(figsize=(W2, 74 * MM))
+    fig = plt.figure(figsize=(W2, 84 * MM))
     gs = fig.add_gridspec(1, 2, width_ratios=[1.4, 1.0], wspace=0.34)
-    fig.subplots_adjust(bottom=0.27, top=0.93)
+    fig.subplots_adjust(bottom=0.30, top=0.93)
 
     # (a) single-layer magnitude
     ax = fig.add_subplot(gs[0, 0])
@@ -151,7 +157,7 @@ def fig1():
     ax2 = fig.add_subplot(gs[0, 1])
     ax2.set_xlim(0, 10); ax2.set_ylim(0, 10.4); ax2.axis("off")
 
-    def box(x, y, w, h, txt, ec, fs=5.6):
+    def box(x, y, w, h, txt, ec, fs=5.0):
         ax2.add_patch(FancyBboxPatch((x, y), w, h,
                      boxstyle="round,pad=0.02,rounding_size=0.12",
                      fc="#FFFFFF", ec=ec, lw=0.9))
@@ -161,39 +167,39 @@ def fig1():
     def hdr(x, y, txt, ec):
         ax2.add_patch(Rectangle((x, y), 0.22, 0.22, fc=ec, ec="none"))
         ax2.text(x + 0.32, y + 0.11, txt, ha="left", va="center",
-                 fontsize=5.6, color=INK)
+                 fontsize=5.4, color=INK)
 
     # group headers
-    hdr(0.4, 9.5, "External-label endpoints", C_CENT)
-    hdr(3.9, 9.5, "Nested / duplicated", C_NEU)
-    hdr(7.2, 9.5, "Constructed / circular", C_CIRC)
+    hdr(0.4, 9.55, "External-label endpoints", C_CENT)
+    hdr(3.9, 9.55, "Nested / duplicated", C_NEU)
+    hdr(7.2, 9.55, "Constructed / circular", C_CIRC)
 
-    # external-label (blue)
-    box(0.4, 6.6, 2.9, 2.5, "E1 pan-dependency\n(n = %d)" % npos("E1 pan-dependency"),
-        C_CENT, fs=6.0)
-    box(0.4, 3.7, 2.9, 1.5, "E4 CRC zero-shot\n(n = %d)" % npos("E4 CRC zero-shot transfer"),
+    # external-label (blue) -- 4 boxes, generous heights to fit text
+    box(0.4, 6.9, 2.9, 2.4, "E1 pan-dependency\n(n = %d)" % npos("E1 pan-dependency"),
+        C_CENT, fs=5.8)
+    box(0.4, 5.1, 2.9, 1.6, "E4 CRC zero-shot\n(n = %d)" % npos("E4 CRC zero-shot transfer"),
         C_CENT)
-    box(0.4, 2.0, 2.9, 1.5, "E5 historical target\nconcordance (n = %d)"
+    box(0.4, 3.3, 2.9, 1.6, "E5 historical target\nconcordance (n = %d)"
         % npos("E5 historical clinical-target concordance"), C_CENT)
-    box(0.4, 0.4, 2.9, 1.5, "E6 PDAC pharmacological-\nresponse proxy (n = %d)"
+    box(0.4, 1.5, 2.9, 1.6, "E6 PDAC pharmacological-\nresponse proxy (n = %d)"
         % npos("E6 PDAC drug-response actionability"), C_CENT)
 
-    # nested (grey)
-    box(3.9, 5.4, 2.9, 2.2, "E2 PDAC-enriched\n(top quartile of E1,\n"
+    # nested (grey) -- taller boxes for multi-line text
+    box(3.9, 5.3, 2.9, 3.7, "E2 PDAC-enriched\n(top quartile of E1,\n"
         "n = %d) [nested in E1]" % npos("E2 PDAC-enriched dependency"), C_NEU)
-    box(3.9, 2.4, 2.9, 2.2, "E3-A leakage-controlled\n\u2261 E1 (n = %d)\n"
+    box(3.9, 1.5, 2.9, 3.4, "E3-A leakage-controlled\n\u2261 E1 (n = %d)\n"
         "dropping druggability\nreturns E1 exactly" % npos("E3-A leakage-controlled essentiality"),
         C_NEU)
 
     # constructed / circular (purple)
-    box(7.2, 5.4, 2.7, 2.6, "E3 essential-and-\ndruggable\n(E1 \u2229 druggable,\n"
+    box(7.2, 5.3, 2.7, 3.7, "E3 essential-and-\ndruggable\n(E1 \u2229 druggable,\n"
         "n = %d)\n[constructed / circular]" % npos("E3 conjunctive actionability"), C_CIRC)
-    box(7.2, 2.2, 2.7, 2.0, "E3-C tractability-\nas-label\n(n = %d)"
+    box(7.2, 1.5, 2.7, 3.4, "E3-C tractability-\nas-label\n(n = %d)"
         % npos("E3-C out-of-evidence druggability"), C_CIRC)
 
-    ax2.text(5.0, -0.2, "Blue: external-label endpoints  \u00b7  Grey: nested / duplicated"
+    ax2.text(5.0, -0.25, "Blue: external-label endpoints  \u00b7  Grey: nested / duplicated"
              "  \u00b7  Purple: constructed / circular diagnostics",
-             ha="center", fontsize=5.2, color=INK)
+             ha="center", fontsize=5.0, color=INK)
     panel(ax2, "b")
     save(fig, "Fig1")
 
@@ -280,9 +286,9 @@ def fig3():
     ep_plot = ["E1 pan-dependency", "E4 CRC zero-shot transfer",
                "E5 historical clinical-target concordance",
                "E6 PDAC drug-response actionability"]
-    fig = plt.figure(figsize=(W2, 66 * MM))
+    fig = plt.figure(figsize=(W2, 74 * MM))
     gs = fig.add_gridspec(1, 2, width_ratios=[1.5, 1.0], wspace=0.42)
-    fig.subplots_adjust(bottom=0.30, top=0.90)
+    fig.subplots_adjust(bottom=0.36, top=0.90)
 
     # (a) effect size + 95% CI  (legend INSIDE panel a, top-right)
     ax = fig.add_subplot(gs[0, 0])
@@ -305,9 +311,9 @@ def fig3():
     ax.set_xlabel("$\\Delta$AUROC = scorer $-$ STRING centrality\n"
                   "(paired bootstrap, 95% CI)")
     ax.set_title("Integration vs centrality: effect size", fontsize=7.5, loc="left")
-    ax.legend([Patch(fc=C_INT, ec="none"), Patch(fc=C_RF, ec="none")],
-              ["Harmonic mean", "Random forest"], loc="upper right",
-              fontsize=5.4, frameon=False)
+    below_legend(ax, [Patch(fc=C_INT, ec="none"), Patch(fc=C_RF, ec="none")],
+                 labels=["Harmonic mean", "Random forest"], ncol=2, y=-0.42,
+                 fontsize=5.4)
     panel(ax, "a")
 
     # (b) network-community resampling
@@ -336,9 +342,9 @@ def fig3():
 # Fig. 4 | why integration appears to work
 # =====================================================================
 def fig4():
-    fig = plt.figure(figsize=(W2, 78 * MM))
+    fig = plt.figure(figsize=(W2, 86 * MM))
     gs = fig.add_gridspec(1, 3, width_ratios=[1.15, 1.0, 1.25], wspace=0.48)
-    fig.subplots_adjust(bottom=0.27, top=0.90)
+    fig.subplots_adjust(bottom=0.30, top=0.95)
 
     # (a) annotation-absence share (formal layer names, black text)
     ax = fig.add_subplot(gs[0, 0])
@@ -357,11 +363,13 @@ def fig4():
     ax.set_title("How much evidence is annotation absence", fontsize=7.5, loc="left")
     mean_pct = SENT["S1_sentinel_coding"]["mean_pct_sentinel_across_layers"]
     cd_pct = lay["cancer_driver"]["pct_sentinel"]
-    # black text + thin purple keyline (no coloured text)
-    ax.text(96, len(names) - 0.8, "cancer driver\n= %.1f%%" % cd_pct,
+    cd_idx = names.index("cancer_driver")
+    # black text; callouts placed clear of the bars and of each other
+    ax.text(lay["cancer_driver"]["pct_sentinel"] + 1.5, cd_idx,
+            "cancer driver = %.1f%%" % cd_pct, va="center", ha="left",
+            fontsize=5.2, color=INK)
+    ax.text(108, len(names) - 0.6, "mean across\n9 layers = %.1f%%" % mean_pct,
             va="top", ha="right", fontsize=5.2, color=INK)
-    ax.text(108, 0.15, "mean across\n9 layers = %.1f%%" % mean_pct,
-            va="bottom", ha="right", fontsize=5.2, color=INK)
     panel(ax, "a")
 
     # (b) multiplicative rule sign-flip partition
@@ -395,7 +403,7 @@ def fig4():
                                                      fontsize=5.4, color=INK)
     ax.set_title("Multiplicative rule is not order-preserving", fontsize=7.5,
                  loc="left")
-    ax.text(0.5, 1.06, "Additional evidence can lower the score.",
+    ax.text(0.5, 1.10, "Additional evidence can lower the score.",
             transform=ax.transAxes, ha="center", fontsize=5.4, color=INK)
     below_legend(ax,
                  [Patch(fc="#DCE6F0", ec=C_CENT), Patch(fc="#F2E2D6", ec=C_RF),
@@ -445,9 +453,9 @@ def fig5():
     # five visually DISTINCT colours (no three teals)
     shades = [C_INT, C_LBLUE, C_RF, C_GOLD, C_CENT]
     eps = [e for e in EP_FULL if not e.startswith("E3-A")]
-    fig = plt.figure(figsize=(W2, 78 * MM))
+    fig = plt.figure(figsize=(W2, 86 * MM))
     gs = fig.add_gridspec(1, 4, width_ratios=[1.5, 1.05, 0.85, 0.95], wspace=0.52)
-    fig.subplots_adjust(bottom=0.30, top=0.90)
+    fig.subplots_adjust(bottom=0.36, top=0.90)
 
     # (a) fixed functional forms
     ax = fig.add_subplot(gs[0, 0])
@@ -463,7 +471,7 @@ def fig5():
     ax.set_title("Fixed functional forms", fontsize=7.5, loc="left")
     handles = [Patch(fc=c, ec="none") for c in shades]
     ax.legend(handles=handles, labels=forms, loc="lower center",
-              bbox_to_anchor=(0.5, -0.30), ncol=3, handlelength=1.0,
+              bbox_to_anchor=(0.5, -0.36), ncol=3, handlelength=1.0,
               columnspacing=0.9, fontsize=5.4)
     panel(ax, "a")
 
@@ -582,16 +590,15 @@ def fig6():
     for i, (s, c) in enumerate(scorers):
         bx = 0.5 + i * 2.3
         box(bx, 2.0, 2.0, 1.6, s, "#FFFFFF", c)
-    box(2.7, 0.2, 4.6, 1.4, "target attribution:\nranked genes \u2192 candidates",
+    box(0.5, 0.2, 9.0, 1.4, "target attribution:\nranked genes \u2192 candidates",
         "#FFFFFF", INK)
-    for (x0, y0, x1, y1) in ((2.6, 7.2, 4.2, 6.2),
-                             (7.4, 7.2, 5.8, 6.2),
-                             (5.0, 6.2, 5.0, 4.4),
+    for (x0, y0, x1, y1) in ((2.7, 7.2, 3.2, 6.2),
+                             (7.3, 7.2, 6.8, 6.2),
+                             (5.0, 4.4, 5.0, 3.6),
                              (1.5, 2.0, 1.5, 1.6),
                              (3.8, 2.0, 3.8, 1.6),
-                             (6.2, 2.0, 6.2, 1.6),
-                             (8.5, 2.0, 8.5, 1.6),
-                             (5.0, 1.8, 5.0, 1.6)):
+                             (6.1, 2.0, 6.1, 1.6),
+                             (8.4, 2.0, 8.4, 1.6)):
         ax.annotate("", xy=(x1, y1), xytext=(x0, y0),
                     arrowprops=dict(arrowstyle="->", lw=0.7, color="#444444"))
     ax.text(5.0, 9.8, "E6 construction & target-attribution", ha="center",
@@ -624,7 +631,7 @@ def fig6():
     ax.set_xlim(0.30, 1.06)
     ax.set_xlabel("AUROC on E6 (GDSC drug response)")
     ax.set_title("Pharmacological stress test (E6)", fontsize=7.5, loc="left")
-    panel(ax, "b")
+    panel(ax, "b", external=True)
     save(fig, "Fig6")
 
 
