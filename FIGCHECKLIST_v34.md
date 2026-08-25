@@ -171,3 +171,10 @@ still overlap. Re-rendered (`verify_v34.py` re-baselined → PASS).
 
 Open item carried forward: final **human/multimodal** visual gate at print size (current
 model cannot read raster images) — confirm no residual overlap in Fig.1–6 + ED_Fig.1–4 PDFs.
+
+## Round 6 — re-check & fixes (2026-08-25, Fig.5 legend separation)
+
+Author visual feedback: Fig.5 panel **b** legend overlapped panel **a** legend.
+`below_legend` gained a horizontal `x` parameter; panel (a) legend shifted left
+(`x` 0.5 → 0.42), panel (b) legend shifted right (`x` 0.5 → 0.62) so the two boxed
+legends no longer collide. Re-rendered (`verify_v34.py` → PASS).
