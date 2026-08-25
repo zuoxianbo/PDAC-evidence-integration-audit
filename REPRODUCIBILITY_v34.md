@@ -61,7 +61,7 @@ python code/v18_weightspace.py            # Dirichlet weight space -> results/v1
 python code/v18_sentinel_audit.py         # S1-S4 missing-data & combination-rule audit
                                            #   -> results/v18_sentinel_audit.json
 python code/v18_figures_v34.py            # 6 Nature display items -> figures/Fig1-6_v34.png/.pdf
-python code/v18_ed_figures_v32_20260824.py  # 4 Extended Data figures
+python code/v18_ed_figures_v34.py         # 4 Extended Data figures
 python code/verify_v34.py                 # integrity gate + manifest
 ```
 
@@ -108,3 +108,18 @@ to V17/V32 the only changes were:
 - **Added** `verify_v34.py` reproducibility gate and this document.
 
 All changes are recorded in `AUDIT_v34.md`, `STATS_v34.md`, and `FIGCHECKLIST_v34.md`.
+
+---
+
+## 6. Provenance stamps (v34 final)
+
+| Stamp | Value |
+|-------|-------|
+| Local git commit (Round 3) | `941eaff810e7ad971a9d698ed8cfb32365f03a9e` |
+| `verify_v34_manifest.json` SHA-256 | `718f5fb5c7276627324e6fb8fbf7b4776ddb471e8dedc5db37567db610ed7d9d` |
+| GitHub repository | `zuoxianbo/PDAC-evidence-integration-audit` (branch `main`) |
+| Submission collection | `v34_20260825/` (54 files, self-contained) |
+
+The integrity gate (`verify_v34.py`) **PASSes** with these stamps; every main
+figure (Fig1–6) and Extended Data figure (ED_Fig1–4) SHA-256 is recorded in the
+manifest and verified bit-identical on re-run.
