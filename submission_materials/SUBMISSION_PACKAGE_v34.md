@@ -2,8 +2,8 @@
 
 **Manuscript:** *Auditing when evidence integration improves therapeutic target prioritization*
 **Journal / Type:** *Nature Computational Science* · **Analysis**
-**Release commit:** `36768ced1f233f4c4dc4d31cc459c460748e875c`
-**Results-manifest SHA-256:** `1c3a43c74f5cc0bdfba651d02168549dc431eaaed19e039a1c3c4c2cf421b33c`
+**Release commit:** `941eaff810e7ad971a9d698ed8cfb32365f03a9e`
+**Results-manifest SHA-256:** `718f5fb5c7276627324e6fb8fbf7b4776ddb471e8dedc5db37567db610ed7d9d`
 **Code repo:** https://github.com/zuoxianbo/PDAC-evidence-integration-audit
 **Reproducibility gate:** `python code/verify_v34.py` → **PASS**
 
@@ -23,7 +23,7 @@
 | `submission_materials/cover_letter_v34.md` | ✅ with [bracket] placeholders |
 | `submission_materials/author_contributions_v34.md` | 🔴 CRediT template, names pending |
 | `submission_materials/competing_interests_v34.md` | 🔴 default "no competing interests", confirm |
-| Extended Data Fig.1–4 (`code/v18_ed_figures_v32_20260824.py`) | ✅ generated in prior v32 run |
+| Extended Data Fig.1–4 (`code/v18_ed_figures_v34.py`) | ✅ generated (v34 palette) |
 | Supplementary Tables 1–5 + Source Data | ✅ in `results/`, referenced by manuscript |
 
 ## B. Suggested reviewers (pool of 6 — pick 4–5 after conflict screen)
@@ -83,7 +83,7 @@ Excluded reviewers: **none by default** — name only on a *documentable* confli
 | 23 | Source Data complete/machine-readable | ✅ |
 | 24 | Public-data URLs/versions tested | ✅ (canonical repo live) |
 | 25 | Code repo reproduces outputs | ✅ (verify_v34 PASS; repo uploaded) |
-| 26 | Git SHA + manifest hash in manuscript point to release | ✅ patched to 36768ce / 1c3a43c7 |
+| 26 | Git SHA + manifest hash in manuscript point to release | ✅ patched to 941eaff / 718f5fb5 |
 | 27 | Data/Code availability consistent with repo | ✅ |
 | 28 | Funding/Contributions/Competing/Ethics verified | 🔴 pending author |
 | 29 | AI-use disclosure accurate | ✅ (in manuscript) |
