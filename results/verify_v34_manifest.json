@@ -3,7 +3,7 @@
   "n_boot": 2000,
   "figures": {
     "Fig1_v34.png": "5b48e7a35f4cfda9203437bfc8c89ef2e43d1e4f3cc8035aac759dfd94bed761",
-    "Fig2_v34.png": "4429ac2f791a097a5e6c761cbda9559041028cd75413c9a3b2c7beaffae1451e",
+    "Fig2_v34.png": "9d96e67b85f651ba67369e17db5c3390aefea69b4bfdef016b6789b2601c1360",
     "Fig3_v34.png": "f0a3aa35accd1ba954327824460ec28bc54225155d652466f12130d92001bd58",
     "Fig4_v34.png": "6f3fc1edddf87eed36ee88a17cdc27f7d5ad88d1eb3b2e02f43d1230c2754708",
     "Fig5_v34.png": "49f8101103ec854f69b8111c05d3b78e2e5bcfc98ed14e6eb1e893386742e987",
@@ -22,7 +22,7 @@
   },
   "code": {
     "v18_recompute.py": "2f0497379287b38bccb02e497e97d8fdb252c25f1353995bc5457a2bb5348728",
-    "v18_figures_v34.py": "62399435db01b48f7867392989fc0067699d2c1ec8de191e34e762f94cdfc3b7",
+    "v18_figures_v34.py": "d5d2c328bf8c8d2d71d170524c58c492fddc925b3a4cea20b5c8410a07eae8dd",
     "v18_ed_figures_v34.py": "97bdd8d8f1d425ec9dce0d5c3af638cc03d2f8f7badaa1a83949c650a5041cfa",
     "verify_v34.py": "b2d98e32eae1bb830346ec3cd4d36a4bad5429b4b507a38f737de37d02cbaeaa"
   }
