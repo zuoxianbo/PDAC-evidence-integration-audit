@@ -2,8 +2,8 @@
 
 **Manuscript:** *Auditing when evidence integration improves therapeutic target prioritization*
 **Journal / Type:** *Nature Computational Science* · **Analysis**
-**Release commit:** `941eaff810e7ad971a9d698ed8cfb32365f03a9e`
-**Results-manifest SHA-256:** `718f5fb5c7276627324e6fb8fbf7b4776ddb471e8dedc5db37567db610ed7d9d`
+**Release commit:** `95b5026eb864ed2a09bdfa1db1836fc90f1ec27d`
+**Results-manifest SHA-256:** `44fc3c853f85a9d66e132f1aba69f6897a586d3ff93d1cb0558f9ef758902618`
 **Code repo:** https://github.com/zuoxianbo/PDAC-evidence-integration-audit
 **Reproducibility gate:** `python code/verify_v34.py` → **PASS**
 
@@ -83,7 +83,7 @@ Excluded reviewers: **none by default** — name only on a *documentable* confli
 | 23 | Source Data complete/machine-readable | ✅ |
 | 24 | Public-data URLs/versions tested | ✅ (canonical repo live) |
 | 25 | Code repo reproduces outputs | ✅ (verify_v34 PASS; repo uploaded) |
-| 26 | Git SHA + manifest hash in manuscript point to release | ✅ patched to 941eaff / 718f5fb5 |
+| 26 | Git SHA + manifest hash in manuscript point to release | ✅ patched to 95b5026 / 44fc3c85 |
 | 27 | Data/Code availability consistent with repo | ✅ |
 | 28 | Funding/Contributions/Competing/Ethics verified | 🔴 pending author |
 | 29 | AI-use disclosure accurate | ✅ (in manuscript) |
