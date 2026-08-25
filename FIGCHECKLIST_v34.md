@@ -96,3 +96,25 @@
 
 **Status:** structure & provenance ✅; **pending human/multimodal visual gate** before
 the PDF is considered production-final.
+
+---
+
+## Round 2 — re-check & fixes (2026-08-25)
+
+Author visual feedback: Fig.1/3/4/5 had overlap; Fig.6a arrow positions inaccurate;
+Fig.6b panel letter sat on the bars. All fixed in `v18_figures_v34.py` and re-rendered
+(commit `65a40de`); manifest re-recorded.
+
+| Fig | Issue reported | Fix applied |
+|-----|----------------|-------------|
+| 1b | box text overflowed E3 / E3-A boxes | taller boxes (h 3.4–3.7) + smaller font (5.0 pt); group headers lifted to y=9.55; fig height 74→84 mm |
+| 3a | legend overlapped top endpoint data | legend moved **below** the axes (`below_legend`, y=-0.42); bottom margin 0.30→0.36 |
+| 4a | two callout texts could collide / sit on bars | cancer-driver callout now sits to the **right of its own bar**; mean callout pinned top-right corner; both black |
+| 4b | "Additional evidence can lower the score." collided with title | lifted to y=1.10 (above axes); top margin 0.90→0.95 |
+| 5a | bottom legend crowded the x-label | legend dropped to y=-0.36; fig height 78→86 mm, bottom margin 0.30→0.36 |
+| 6a | arrow #3 was a self-loop inside the E6 box; arrow #7 (scorer 3) landed at x=8.5 **outside** the attribution box (x ended 7.3) | removed self-loop; attribution box widened to x∈[0.5,9.5]; all 4 scorer→attribution arrows now land **inside** the box; GDSC/drug-response arrows converge into E6 top |
+| 6b | panel letter "b" drawn on the bars | `panel(ax,"b", external=True)` → letter moved **above** the axes (off the graphic) |
+| 1/2/3/4/5/6 | general label crowding | figures made taller; margins increased; re-verified with `verify_v34.py` (PASS, new figure hashes) |
+
+Open item carried forward: final **human/multimodal** visual gate at print size (current
+model cannot read raster images) — confirm no residual overlap in Fig.1–6 PDFs.
