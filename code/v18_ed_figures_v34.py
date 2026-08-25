@@ -166,16 +166,17 @@ def fig_ed3():
     ax.set_xlabel("AUROC on E3", fontsize=6, color=INK)
     ax.set_ylabel("Dirichlet draws", fontsize=6, color=INK)
     ax.set_title("d", fontsize=9, fontweight="bold", loc="left", color=INK)
-    ax.text(0.97, 0.96,
-            "mean %.3f\nmedian %.3f\n91.2%% below chance\n3.2%% above centrality" %
+    ax.text(0.97, 0.95,
+            "mean %.3f\nmedian %.3f\n91.2%% < chance\n3.2%% > centrality" %
             (smp.mean(), np.median(smp)), transform=ax.transAxes, ha="right",
-            va="top", fontsize=5.8, color=INK)
+            va="top", fontsize=5.2, color=INK,
+            bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="none"))
     ax.legend(handles=[Patch(fc=C_CHANCE, ec="none", label="Chance (0.500)"),
                        Patch(fc=C_CENT, ec="none",
                              label="STRING centrality (%.3f)" % WS["string_auroc_e3"]),
                        Patch(fc=C_CIRC, ec="none",
                              label="Prespecified weighting (%.3f)" % WS["v17_chosen_weighting_auroc_e3"])],
-              loc="upper center", bbox_to_anchor=(0.5, -0.40), ncol=1,
+              loc="upper center", bbox_to_anchor=(0.5, -0.34), ncol=1,
               fontsize=5.8, labelcolor=INK)
     fig.text(0.005, 0.985, "Extended Data Fig. 3 | 1,000 Dirichlet(1,1,1) "
              "weightings of the three driver layers and the resulting E3 AUROC",
