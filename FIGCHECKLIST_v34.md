@@ -257,3 +257,16 @@ STRING 22→23, TCGA-PAAD 23–24→22,24, COSMIC Cancer Gene Census 23→24 (su
 runs preserved); Introduction dropped premature Ref.21 ("1–2,15–16,21"→"1–2,15–16").
 
 Re-rendered; `verify_v34.py` → PASS.
+
+## Round 12 — Fig.2 legend colour mismatch (2026-08-25)
+
+Author feedback: Fig.2 legend colours did not match the figure. Root cause: the
+heatmap encodes **AUROC** via a colormap, while the bottom legend showed five
+discrete scorer-class swatches (navy/teal/orange/grey/purple) that appeared nowhere
+in the figure (row labels are black). Fix: colormap switched from diverging
+(`TwoSlopeNorm` vcenter 0.5) to **sequential** (`Normalize` 0.30–1.00); the dangling
+5-colour scorer legend was replaced with a single "constructed / circular (E3, E3-C)"
+swatch (`#F3EFF8` fill + `#7C6BAE` edge) that exactly matches the column background.
+Manuscript Fig.2 caption "diverging colour scale centred at chance" → "sequential
+colour scale from light (low AUROC) to dark blue (high AUROC)". Re-rendered
+(`verify_v34.py` → PASS).
