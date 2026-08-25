@@ -185,3 +185,22 @@ Author visual feedback: Fig.5 panel (a) legend should be 3 rows with its bottom 
 aligned to panel (b) legend. Panel (a) legend set to `ncol=2` (5 items → 3 rows:
 2+2+1) and bottom anchored to the same `y=-0.46` as panel (b). Re-rendered
 (`verify_v34.py` → PASS).
+
+## Round 8 — alignment with V34-图片修订建议.docx (2026-08-25)
+
+Full re-check against the author's image-revision document. Data consistency verified first:
+E6 AUROC — network centrality 0.910, harmonic 0.846, tractability (druggability) 0.780,
+random forest **0.913**. The manuscript's two "0.910" statements both refer to centrality
+(vs harmonic 0.846 / tractability 0.780) and are correct; Fig.6b RF = 0.913 matches
+`v18_source_data.csv`. No 0.913-vs-0.910 conflict. Terminology already conforms
+("pharmacological-response proxy", "essential-and-druggable", "tractability-as-label",
+black text, fixed semantic palette, Arial, vector PDF).
+
+Remaining fixes applied:
+
+| Fig | Issue (per revision doc) | Fix applied |
+|-----|--------------------------|-------------|
+| 2 | columns should group `E1 \| E2,E3-A \| E3,E3-C \| E4,E5,E6` with thin separators | re-ordered endpoint columns into the four provenance groups and set 3 white separators at x = 1, 3, 5 |
+| 3 | legend crowded the bottom; over-long x-axis definition | legend moved **inside panel a, top-right** (`loc="upper right"`, xlim widened to −0.34…0.30); x-label shortened to "ΔAUROC (paired bootstrap, 95% CI)"; title → "AUROC difference from network centrality"; figure bottom margin reduced (0.36→0.24) |
+
+Re-rendered (`verify_v34.py` → PASS).
