@@ -178,3 +178,10 @@ Author visual feedback: Fig.5 panel **b** legend overlapped panel **a** legend.
 `below_legend` gained a horizontal `x` parameter; panel (a) legend shifted left
 (`x` 0.5 → 0.42), panel (b) legend shifted right (`x` 0.5 → 0.62) so the two boxed
 legends no longer collide. Re-rendered (`verify_v34.py` → PASS).
+
+## Round 7 — re-check & fixes (2026-08-25, Fig.5a legend shape)
+
+Author visual feedback: Fig.5 panel (a) legend should be 3 rows with its bottom edge
+aligned to panel (b) legend. Panel (a) legend set to `ncol=2` (5 items → 3 rows:
+2+2+1) and bottom anchored to the same `y=-0.46` as panel (b). Re-rendered
+(`verify_v34.py` → PASS).
