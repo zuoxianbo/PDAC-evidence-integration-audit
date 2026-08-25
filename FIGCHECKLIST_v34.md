@@ -204,3 +204,20 @@ Remaining fixes applied:
 | 3 | legend crowded the bottom; over-long x-axis definition | legend moved **inside panel a, top-right** (`loc="upper right"`, xlim widened to −0.34…0.30); x-label shortened to "ΔAUROC (paired bootstrap, 95% CI)"; title → "AUROC difference from network centrality"; figure bottom margin reduced (0.36→0.24) |
 
 Re-rendered (`verify_v34.py` → PASS).
+
+## Round 9 — apply NCS_v34_图片修订最终执行方案.docx (2026-08-25)
+
+Full line-by-line application of the final execution plan. Data first verified against
+frozen JSONs: Fig.4b quadrants **14.1 / 1.9 / 57.8 / 26.2%**, Fig.5 **IQR 0.251–0.365**,
+Fig.3 **E5 P = 0.0167 (harmonic) / 0.0813 (RF)** — none of E5/E6 satisfy "P < 10⁻¹⁶",
+so the old blanket P-caption was **wrong** and removed. Fig.6 RF = 0.913 already matches
+source/manuscript.
+
+| Fig | Execution-plan requirement | Fix applied |
+|-----|---------------------------|-------------|
+| 1b | panel-b top legend: three classes spaced apart, no crowding; drop "leakage" from endpoint box title | group-header font 5.4 → 4.6 pt (fits each column); E3-A box "E3-A leakage-controlled" → **"E3-A essentiality control"** (leakage removed from the box title) |
+| 2 | wide white separator band masks AUROC digits; clarify 8 vs 6 endpoints | separator line thinned 2.6 pt white → **0.8 pt #999999** (no digit masking); bottom caption now states "8 operational endpoints; six independent primary endpoints (E1, E4, E5, E6)" |
+| 3 | delete the wrong P-value summary line; E5 P = 0.0167 must be consistent | removed the "P < 10⁻¹⁶ for every contrast" caption entirely (full P values live in Source Data) |
+| 5 | IQR = 0.251–0.365 | IQR legend label back to 3 decimals ("median 0.288 (IQR 0.251–0.365)") |
+
+Re-rendered (`verify_v34.py` → PASS).
