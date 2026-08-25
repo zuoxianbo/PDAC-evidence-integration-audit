@@ -171,7 +171,7 @@ def fig1():
     def hdr(x, y, txt, ec):
         ax2.add_patch(Rectangle((x, y), 0.22, 0.22, fc=ec, ec="none"))
         ax2.text(x + 0.32, y + 0.11, txt, ha="left", va="center",
-                 fontsize=5.4, color=INK)
+                 fontsize=4.6, color=INK)
 
     # group headers
     hdr(0.4, 9.55, "External-label endpoints", C_CENT)
@@ -192,7 +192,7 @@ def fig1():
     # nested (grey) -- short lines, taller boxes
     box(3.9, 5.6, 3.1, 2.6, "E2 PDAC-enriched\ntop quartile of E1\n(n = %d)\n"
         "nested in E1" % npos("E2 PDAC-enriched dependency"), C_NEU, fs=4.4)
-    box(3.9, 1.6, 3.1, 3.5, "E3-A leakage-\ncontrolled \u2261 E1\n(n = %d)\n"
+    box(3.9, 1.6, 3.1, 3.5, "E3-A essentiality\ncontrol \u2261 E1\n(n = %d)\n"
         "drop Druggability\n\u2192 E1 exactly" % npos("E3-A leakage-controlled essentiality"),
         C_NEU, fs=4.4)
 
@@ -259,9 +259,9 @@ def fig2():
     for j in circ_cols:
         ax.add_patch(Rectangle((j - .5, -0.5), 1, len(meths), fc="#F3EFF8",
                                ec="none", zorder=-1, alpha=0.9))
-    # group separators: E1 | E2,E3-A | E3,E3-C | E4,E5,E6
+    # group separators: E1 | E2,E3-A | E3,E3-C | E4,E5,E6 (thin lines, no masking)
     for xb in (1.0, 3.0, 5.0):
-        ax.axvline(xb, color="white", lw=2.6, zorder=5)
+        ax.axvline(xb, color="#999999", lw=0.8, zorder=5)
     ax.set_xticks(range(len(eps)))
     ax.set_xticklabels([EP_SHORT[e] for e in eps], fontsize=6, color=INK)
     ax.set_yticks(range(len(meths)))
@@ -283,9 +283,10 @@ def fig2():
     labels = ["centrality / single-layer", "fixed-form integration",
               "supervised learner", "other single layer", "constructed/circular"]
     below_legend(ax, handles, labels=labels, ncol=5, y=-0.22, fontsize=5.4)
-    ax.text(0.5, -0.36, "purple columns = constructed/circular diagnostic "
-            "(E3, E3-C). E3-C AUROC = 1.000 is a label-as-input control, "
-            "not a model result.", transform=ax.transAxes, fontsize=5.2,
+    ax.text(0.5, -0.36, "8 operational endpoints; six independent primary "
+            "endpoints (E1, E4, E5, E6). Purple columns = constructed/circular "
+            "diagnostics (E3, E3-C); E3-C AUROC = 1.000 is a label-as-input "
+            "control, not a model result.", transform=ax.transAxes, fontsize=5.2,
             color=INK, ha="center")
     save(fig, "Fig2")
 
@@ -346,10 +347,6 @@ def fig3():
                100 - S["pct_positive"]),
             transform=ax.transAxes, fontsize=5.0, color=INK, va="top", ha="right")
     panel(ax, "b")
-    # concise caption (no database-style P string)
-    fig.text(0.5, 0.01, "Paired-bootstrap DeLong P < 10$^{-16}$ for every "
-             "scorer-versus-centrality contrast.", ha="center", va="bottom",
-             fontsize=5.2, color=INK)
     save(fig, "Fig3")
 
 
@@ -508,7 +505,7 @@ def fig5():
                  labels=["STRING %.3f" % WS["string_auroc_e3"],
                          "prespecified %.3f" % WS["v17_chosen_weighting_auroc_e3"],
                          "2.5 / 97.5 pct",
-                         "median %.3f (IQR %.2f\u2013%.2f)" % (med, q25, q75)],
+                         "median %.3f (IQR %.3f\u2013%.3f)" % (med, q25, q75)],
                  ncol=2, y=-0.46, fontsize=5.0, frameon=True, x=0.62)
     panel(ax, "b")
 
