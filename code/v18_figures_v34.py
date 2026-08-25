@@ -469,7 +469,7 @@ def fig5():
     ax.set_title("Fixed functional forms", fontsize=7.5, loc="left")
     handles = [Patch(fc=c, ec="none") for c in shades]
     ax.legend(handles=handles, labels=forms, loc="lower center",
-              bbox_to_anchor=(0.42, -0.44), ncol=3, handlelength=1.0,
+              bbox_to_anchor=(0.42, -0.46), ncol=2, handlelength=1.0,
               columnspacing=0.9, fontsize=5.4, frameon=True, edgecolor=INK,
               fancybox=False, borderpad=0.4)
     panel(ax, "a")
