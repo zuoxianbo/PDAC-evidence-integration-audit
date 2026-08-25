@@ -246,22 +246,24 @@ def fig2():
         for j in range(len(eps)):
             if np.isnan(M[i, j]):
                 ax.text(j, i, "n.a.", ha="center", va="center", fontsize=5,
-                        color="#999999")
+                        color="#999999", zorder=10)
                 continue
             leak = (eps[j] == "E3-C out-of-evidence druggability" and M[i, j] > 0.999)
             dark = M[i, j] > 0.78 or leak
             ax.text(j, i, ("%.2f" % M[i, j]).lstrip("0"), ha="center", va="center",
                     fontsize=5.2, color=("white" if dark else INK),
-                    fontweight="bold" if leak else "normal")
+                    fontweight="bold" if leak else "normal", zorder=10)
             if leak:
                 ax.add_patch(Rectangle((j - .5, i - .5), 1, 1, fill=False,
                                        ec=C_CIRC, lw=1.2, ls=(0, (1.4, 1.0))))
     for j in circ_cols:
         ax.add_patch(Rectangle((j - .5, -0.5), 1, len(meths), fc="#F3EFF8",
                                ec="none", zorder=-1, alpha=0.9))
-    # group separators: E1 | E2,E3-A | E3,E3-C | E4,E5,E6 (thin lines, no masking)
-    for xb in (1.0, 3.0, 5.0):
-        ax.axvline(xb, color="#999999", lw=0.8, zorder=5)
+    # group separators on column BOUNDARIES (E1 | E2,E3-A | E3,E3-C | E4,E5,E6).
+    # Boundaries sit at x = 0.5, 2.5, 4.5 (between cells), NOT at cell centers, so
+    # they can never cross an AUROC value. zorder kept below cell text (zorder=10).
+    for xb in (0.5, 2.5, 4.5):
+        ax.axvline(xb, color="#999999", lw=1.2, zorder=4)
     ax.set_xticks(range(len(eps)))
     ax.set_xticklabels([EP_SHORT[e] for e in eps], fontsize=6, color=INK)
     ax.set_yticks(range(len(meths)))
