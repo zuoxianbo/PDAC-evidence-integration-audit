@@ -2,12 +2,18 @@
   "seed": 20260819,
   "n_boot": 2000,
   "figures": {
-    "Fig1_v34.png": "22c019a066fc97c116f9222d21f8404f090c1a2b6af021707fa82ac9536dfb45",
+    "Fig1_v34.png": "1142845fb7e77e6c7ccf2c9e295b247f03bf53770931b8ad7f3d402c72d1e578",
     "Fig2_v34.png": "5ce9f133a390f2e27f6b1159f176910da001ea62ca0c056dbd72ed0450196c41",
-    "Fig3_v34.png": "fcbf9fe21ae029ea593fcfc6a01d5ef8954959947cdc03cb1ae45056e2a69200",
-    "Fig4_v34.png": "ba0dbb27db2f51585e4a0facc3694e729b54a12929d37538fdad540c2033899b",
-    "Fig5_v34.png": "6ecd6d0d364029331d620636f55cc55ebb925e53ebf572e0918725fcb05d5355",
-    "Fig6_v34.png": "6f3d8c1edda7106465a1a2bb040cca3d7345fe0d7ad2be6d9dc21718acd00c4d"
+    "Fig3_v34.png": "5de196203172a6c75e20f596b1afec203be520faced06d1fa7daebd41212745c",
+    "Fig4_v34.png": "553ee732fb6e08fa2f8bc6af294dd7ab80ac0c22f9bdadfc47e09608c9c8b052",
+    "Fig5_v34.png": "bbcc249b183982dd4a720c58f56697933cdfce7cb2a10973048fd4fdd8e95c15",
+    "Fig6_v34.png": "b7cc9e0eeeac61589b2863826ac3dabd45a8c00211a2ce409dd951d3d0634fc1"
+  },
+  "extended_data": {
+    "ED_Fig1_v34.png": "b57fe1cc7ca5760d6db2a33f0b4fcebec337fde37583cd9176c13d29a51e7cf7",
+    "ED_Fig2_v34.png": "d53b2a3930fd1dbd9badb82e49102f1b05342531f06df1ac2ecfc01d530dc961",
+    "ED_Fig3_v34.png": "39a7c1b4c7f447cec2b59dc351241900103322f5e67ef1c07f5f5821a4858ef6",
+    "ED_Fig4_v34.png": "9a0f6b493624971ae7bd3573c82aeb67fe891a299582231d906c0c08c3fd080c"
   },
   "results_artefacts": {
     "v18_ncs_results.json": "29ca38ffeff3f9169c4901a347b83bb2c594427cc919ce520eb12c591bffc57e",
@@ -16,7 +22,8 @@
   },
   "code": {
     "v18_recompute.py": "2f0497379287b38bccb02e497e97d8fdb252c25f1353995bc5457a2bb5348728",
-    "v18_figures_v34.py": "4d7af1273ecc9c074e1fd48673c2f1543db3a2d69abd2c20abf1853a2ebd85b5",
-    "verify_v34.py": "d31c2bb34a0edbf54e07b51a7670f9016bb58b5ee57e939becdb97424fd35218"
+    "v18_figures_v34.py": "5455c00b53079cbe12caf58655fe1710453b570c749dc67ee692805d74236671",
+    "v18_ed_figures_v34.py": "f458b01bb9971b9e10c869e7a733951721c577fbab73c6784e08f09aa50b4b3a",
+    "verify_v34.py": "b2d98e32eae1bb830346ec3cd4d36a4bad5429b4b507a38f737de37d02cbaeaa"
   }
 }
