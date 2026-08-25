@@ -5,8 +5,8 @@
     "Fig1_v34.png": "6d4da3d10ab76a7fb1f505051f4ab102b1ef7dffea393d797c13680e3bf5aad9",
     "Fig2_v34.png": "9a80d484368ffaba91c80618b61f254f08926ea2ee90ba8e7188e9935089d16c",
     "Fig3_v34.png": "1e564989b2dc69aad29e754b67420a315026063591c6764b78a9d73ce4e9e5a4",
-    "Fig4_v34.png": "e79f69c4beaae028898a296069e098679efad269f51e714737feab1b61a4ae6a",
-    "Fig5_v34.png": "0f86f7431d5b31f8ab40597fa7bc0cf06e64cc60b06b869e88720c9877e5a14a",
+    "Fig4_v34.png": "6f3fc1edddf87eed36ee88a17cdc27f7d5ad88d1eb3b2e02f43d1230c2754708",
+    "Fig5_v34.png": "b0df9cf30ad9d5054d97368bdaa45342c52a7891402dd1e9bff2d68eb4e1c75c",
     "Fig6_v34.png": "1728b5877c21b6287ae113f98ac52d2e1704c5ef1097261917dbff41b8bd5271"
   },
   "extended_data": {
@@ -22,7 +22,7 @@
   },
   "code": {
     "v18_recompute.py": "2f0497379287b38bccb02e497e97d8fdb252c25f1353995bc5457a2bb5348728",
-    "v18_figures_v34.py": "70379e78753f2110266d04279f8267dfc1e771f3a753fecaa034e94a0414efe6",
+    "v18_figures_v34.py": "aa9d9f3a9b2d26426885cd3081bdd8476d28d06df82b29a87a2eb8831f6c980d",
     "v18_ed_figures_v34.py": "97bdd8d8f1d425ec9dce0d5c3af638cc03d2f8f7badaa1a83949c650a5041cfa",
     "verify_v34.py": "b2d98e32eae1bb830346ec3cd4d36a4bad5429b4b507a38f737de37d02cbaeaa"
   }
