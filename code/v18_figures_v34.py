@@ -347,7 +347,7 @@ def fig3():
 # =====================================================================
 def fig4():
     fig = plt.figure(figsize=(W2, 86 * MM))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.15, 1.0, 1.25], wspace=0.48)
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.15, 1.0, 1.25], wspace=0.62)
     fig.subplots_adjust(bottom=0.30, top=0.95)
 
     # (a) annotation-absence share (formal layer names, black text)
@@ -402,10 +402,7 @@ def fig4():
     ax.set_yticks([0.25, 0.75]); ax.set_yticklabels(["score rises",
                                                      "score falls"],
                                                      fontsize=5.4, color=INK)
-    ax.set_title("Multiplicative rule is not order-preserving", fontsize=7.5,
-                 loc="left")
-    ax.text(0.5, 1.10, "Additional evidence can lower the score.",
-            transform=ax.transAxes, ha="center", fontsize=5.4, color=INK)
+    ax.set_title("Multiplicative rule is not monotone", fontsize=7.5, loc="left")
     below_legend(ax,
                  [Patch(fc="#DCE6F0", ec=C_CENT), Patch(fc="#F2E2D6", ec=C_RF),
                   Patch(fc="#E6E0F0", ec=C_CIRC)],
@@ -434,8 +431,7 @@ def fig4():
     ax.set_yticklabels([EP_SHORT[e] for (e, _) in rows], fontsize=6, color=INK)
     ax.set_xlim(0.42, 1.02); ax.set_ylim(-0.6, len(rows) - 0.1)
     ax.set_xlabel("AUROC of the integrated support mean")
-    ax.set_title("Effect of removing the label-embedded layer", fontsize=7.5,
-                 loc="left")
+    ax.set_title("Removing the label-embedded layer", fontsize=7.5, loc="left")
     below_legend(ax,
                  [Patch(fc=C_CIRC, ec="none"), Patch(fc=C_NEU, ec="none")],
                  labels=["full support (incl. tractability)", "after tractability "
@@ -455,8 +451,8 @@ def fig5():
     shades = [C_INT, C_LBLUE, C_RF, C_GOLD, C_CENT]
     eps = [e for e in EP_FULL if not e.startswith("E3-A")]
     fig = plt.figure(figsize=(W2, 86 * MM))
-    gs = fig.add_gridspec(1, 4, width_ratios=[1.5, 1.05, 0.85, 0.95], wspace=0.52)
-    fig.subplots_adjust(bottom=0.40, top=0.90)
+    gs = fig.add_gridspec(1, 4, width_ratios=[1.5, 1.05, 0.85, 0.95], wspace=0.62)
+    fig.subplots_adjust(bottom=0.46, top=0.90)
 
     # (a) fixed functional forms
     ax = fig.add_subplot(gs[0, 0])
@@ -472,9 +468,9 @@ def fig5():
     ax.set_title("Fixed functional forms", fontsize=7.5, loc="left")
     handles = [Patch(fc=c, ec="none") for c in shades]
     ax.legend(handles=handles, labels=forms, loc="lower center",
-              bbox_to_anchor=(0.5, -0.36), ncol=3, handlelength=1.0,
+              bbox_to_anchor=(0.5, -0.44), ncol=3, handlelength=1.0,
               columnspacing=0.9, fontsize=5.4, frameon=True, edgecolor=INK,
-              fancybox=False, borderpad=0.5)
+              fancybox=False, borderpad=0.4)
     panel(ax, "a")
 
     # (b) weight space ECDF
@@ -498,11 +494,11 @@ def fig5():
     below_legend(ax,
                  [Patch(fc=C_CENT, ec="none"), Patch(fc=C_RF, ec="none"),
                   Patch(fc=C_NEU, ec="none"), Patch(fc="#F0F0F0", ec=INK)],
-                 labels=["STRING alone %.3f" % WS["string_auroc_e3"],
+                 labels=["STRING %.3f" % WS["string_auroc_e3"],
                          "prespecified %.3f" % WS["v17_chosen_weighting_auroc_e3"],
                          "2.5 / 97.5 pct",
-                         "median %.3f (IQR %.3f\u2013%.3f)" % (med, q25, q75)],
-                 ncol=2, y=-0.40, fontsize=5.0, frameon=True)
+                         "median %.3f (IQR %.2f\u2013%.2f)" % (med, q25, q75)],
+                 ncol=2, y=-0.46, fontsize=5.0, frameon=True)
     panel(ax, "b")
 
     # (c) negative controls (observed ECS: black text, not coloured)
@@ -550,7 +546,7 @@ def fig5():
     ax.set_title("Sentinel-coded versus missingness-aware", fontsize=7.5, loc="left")
     below_legend(ax,
                  [Patch(fc=C_NEU, ec="none"), Patch(fc=C_CENT, ec="none")],
-                 labels=["sentinel = \u22123", "available-case mean"], ncol=1, y=-0.38,
+                 labels=["sentinel = \u22123", "available-case mean"], ncol=1, y=-0.44,
                  fontsize=5.4, frameon=True)
     panel(ax, "d")
     save(fig, "Fig5")
