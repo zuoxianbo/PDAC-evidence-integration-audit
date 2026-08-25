@@ -219,9 +219,19 @@ def fig2():
              "ECS (multiplicative)", "Harmonic mean",
              "Logistic regression", "Elastic net", "Random forest"]
     meths = [m for m in order if any(m in B[e] for e in EP_FULL)]
-    M = np.full((len(meths), len(EP_FULL)), np.nan)
+    # provenance-grouped column order:
+    #   E1 | E2, E3-A (nested) | E3, E3-C (constructed) | E4, E5, E6 (external)
+    eps = ["E1 pan-dependency",
+           "E2 PDAC-enriched dependency",
+           "E3-A leakage-controlled essentiality",
+           "E3 conjunctive actionability",
+           "E3-C out-of-evidence druggability",
+           "E4 CRC zero-shot transfer",
+           "E5 historical clinical-target concordance",
+           "E6 PDAC drug-response actionability"]
+    M = np.full((len(meths), len(eps)), np.nan)
     for i, m in enumerate(meths):
-        for j, e in enumerate(EP_FULL):
+        for j, e in enumerate(eps):
             if m in B[e]:
                 M[i, j] = B[e][m]["auroc"]
     fig, ax = plt.subplots(figsize=(W2, 88 * MM))
@@ -230,15 +240,15 @@ def fig2():
     norm = TwoSlopeNorm(vmin=0.30, vcenter=0.5, vmax=1.0)
     im = ax.imshow(M, cmap=CMAP, norm=norm, aspect="auto")
 
-    circ_cols = [j for j, e in enumerate(EP_FULL) if e in
+    circ_cols = [j for j, e in enumerate(eps) if e in
                  ("E3 conjunctive actionability", "E3-C out-of-evidence druggability")]
     for i in range(len(meths)):
-        for j in range(len(EP_FULL)):
+        for j in range(len(eps)):
             if np.isnan(M[i, j]):
                 ax.text(j, i, "n.a.", ha="center", va="center", fontsize=5,
                         color="#999999")
                 continue
-            leak = (EP_FULL[j] == "E3-C out-of-evidence druggability" and M[i, j] > 0.999)
+            leak = (eps[j] == "E3-C out-of-evidence druggability" and M[i, j] > 0.999)
             dark = M[i, j] > 0.78 or leak
             ax.text(j, i, ("%.2f" % M[i, j]).lstrip("0"), ha="center", va="center",
                     fontsize=5.2, color=("white" if dark else INK),
@@ -249,16 +259,16 @@ def fig2():
     for j in circ_cols:
         ax.add_patch(Rectangle((j - .5, -0.5), 1, len(meths), fc="#F3EFF8",
                                ec="none", zorder=-1, alpha=0.9))
-    # group separators: E1 | E2,E3,E3-A,E3-C | E4,E5,E6
-    for xb in (1.0, 5.0):
+    # group separators: E1 | E2,E3-A | E3,E3-C | E4,E5,E6
+    for xb in (1.0, 3.0, 5.0):
         ax.axvline(xb, color="white", lw=2.6, zorder=5)
-    ax.set_xticks(range(len(EP_FULL)))
-    ax.set_xticklabels([EP_SHORT[e] for e in EP_FULL], fontsize=6, color=INK)
+    ax.set_xticks(range(len(eps)))
+    ax.set_xticklabels([EP_SHORT[e] for e in eps], fontsize=6, color=INK)
     ax.set_yticks(range(len(meths)))
     ax.set_yticklabels(meths, fontsize=6, color=INK)   # ALL row labels black
     ax.set_xlabel("Validation endpoint", fontsize=7)
 
-    ax.set_xticks(np.arange(-.5, len(EP_FULL), 1), minor=True)
+    ax.set_xticks(np.arange(-.5, len(eps), 1), minor=True)
     ax.set_yticks(np.arange(-.5, len(meths), 1), minor=True)
     ax.grid(which="minor", color="white", lw=0.6)
     ax.tick_params(which="minor", length=0)
@@ -293,7 +303,7 @@ def fig3():
                "E6 PDAC drug-response actionability"]
     fig = plt.figure(figsize=(W2, 74 * MM))
     gs = fig.add_gridspec(1, 2, width_ratios=[1.5, 1.0], wspace=0.42)
-    fig.subplots_adjust(bottom=0.36, top=0.90)
+    fig.subplots_adjust(bottom=0.24, top=0.90)
 
     # (a) effect size + 95% CI  (legend INSIDE panel a, top-right)
     ax = fig.add_subplot(gs[0, 0])
@@ -313,12 +323,12 @@ def fig3():
         yy.append(base); ylab.append(EP_SHORT[e])
     ax.axvline(0, color=INK, lw=1.1, zorder=0)
     ax.set_yticks(yy); ax.set_yticklabels(ylab, fontsize=6, color=INK)
-    ax.set_xlabel("$\\Delta$AUROC = scorer $-$ STRING centrality\n"
-                  "(paired bootstrap, 95% CI)")
-    ax.set_title("Integration vs centrality: effect size", fontsize=7.5, loc="left")
-    below_legend(ax, [Patch(fc=C_INT, ec="none"), Patch(fc=C_RF, ec="none")],
-                 labels=["Harmonic mean", "Random forest"], ncol=2, y=-0.42,
-                 fontsize=5.4)
+    ax.set_xlim(-0.34, 0.30)
+    ax.set_xlabel("$\\Delta$AUROC (paired bootstrap, 95% CI)")
+    ax.set_title("AUROC difference from network centrality", fontsize=7.5, loc="left")
+    ax.legend(handles=[Patch(fc=C_INT, ec="none"), Patch(fc=C_RF, ec="none")],
+              labels=["Harmonic mean", "Random forest"], loc="upper right",
+              fontsize=5.4, frameon=False)
     panel(ax, "a")
 
     # (b) network-community resampling
