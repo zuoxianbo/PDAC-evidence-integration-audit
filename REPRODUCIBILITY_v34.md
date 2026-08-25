@@ -115,8 +115,8 @@ All changes are recorded in `AUDIT_v34.md`, `STATS_v34.md`, and `FIGCHECKLIST_v3
 
 | Stamp | Value |
 |-------|-------|
-| Local git commit (Round 3) | `941eaff810e7ad971a9d698ed8cfb32365f03a9e` |
-| `verify_v34_manifest.json` SHA-256 | `718f5fb5c7276627324e6fb8fbf7b4776ddb471e8dedc5db37567db610ed7d9d` |
+| Local git commit (Round 3) | `95b5026eb864ed2a09bdfa1db1836fc90f1ec27d` |
+| `verify_v34_manifest.json` SHA-256 | `44fc3c853f85a9d66e132f1aba69f6897a586d3ff93d1cb0558f9ef758902618` |
 | GitHub repository | `zuoxianbo/PDAC-evidence-integration-audit` (branch `main`) |
 | Submission collection | `v34_20260825/` (54 files, self-contained) |
 
