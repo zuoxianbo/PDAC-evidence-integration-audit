@@ -2,12 +2,12 @@
   "seed": 20260819,
   "n_boot": 2000,
   "figures": {
-    "Fig1_v34.png": "2322bde855ca34185b1bc39cdc28c87896735f0a96322b19956b6d3fee369378",
-    "Fig2_v34.png": "f6abb264e5192d169621394593895dcef82e4958f3f074cdf6cc78a5fdfa4f0c",
+    "Fig1_v34.png": "5b48e7a35f4cfda9203437bfc8c89ef2e43d1e4f3cc8035aac759dfd94bed761",
+    "Fig2_v34.png": "4429ac2f791a097a5e6c761cbda9559041028cd75413c9a3b2c7beaffae1451e",
     "Fig3_v34.png": "f0a3aa35accd1ba954327824460ec28bc54225155d652466f12130d92001bd58",
     "Fig4_v34.png": "6f3fc1edddf87eed36ee88a17cdc27f7d5ad88d1eb3b2e02f43d1230c2754708",
-    "Fig5_v34.png": "a40f7c4040b375d55c157b33120720f0e840c1dc90868b36e17b294e21d8da2c",
-    "Fig6_v34.png": "1728b5877c21b6287ae113f98ac52d2e1704c5ef1097261917dbff41b8bd5271"
+    "Fig5_v34.png": "49f8101103ec854f69b8111c05d3b78e2e5bcfc98ed14e6eb1e893386742e987",
+    "Fig6_v34.png": "298a2601142420f990a84864bb794f0fea37d72fe1b95223bd3c7448c412d9b7"
   },
   "extended_data": {
     "ED_Fig1_v34.png": "b57fe1cc7ca5760d6db2a33f0b4fcebec337fde37583cd9176c13d29a51e7cf7",
@@ -22,7 +22,7 @@
   },
   "code": {
     "v18_recompute.py": "2f0497379287b38bccb02e497e97d8fdb252c25f1353995bc5457a2bb5348728",
-    "v18_figures_v34.py": "5ce73541eb8fde784fb0439584e8db6b0b394b49fd13aee283a5de0872fd7ffe",
+    "v18_figures_v34.py": "62399435db01b48f7867392989fc0067699d2c1ec8de191e34e762f94cdfc3b7",
     "v18_ed_figures_v34.py": "97bdd8d8f1d425ec9dce0d5c3af638cc03d2f8f7badaa1a83949c650a5041cfa",
     "verify_v34.py": "b2d98e32eae1bb830346ec3cd4d36a4bad5429b4b507a38f737de37d02cbaeaa"
   }
