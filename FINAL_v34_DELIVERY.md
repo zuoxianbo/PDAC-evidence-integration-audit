@@ -1,7 +1,7 @@
 # FINAL_v34_DELIVERY — PDAC evidence-integration audit, NCS submission
 
-**Date:** 2026-08-25 · **Release commit:** `941eaff810e7ad971a9d698ed8cfb32365f03a9e`
-**Results-manifest SHA-256:** `718f5fb5c7276627324e6fb8fbf7b4776ddb471e8dedc5db37567db610ed7d9d`
+**Date:** 2026-08-25 · **Release commit:** `95b5026eb864ed2a09bdfa1db1836fc90f1ec27d`
+**Results-manifest SHA-256:** `44fc3c853f85a9d66e132f1aba69f6897a586d3ff93d1cb0558f9ef758902618`
 **Code:** https://github.com/zuoxianbo/PDAC-evidence-integration-audit
 
 ## Verdict: 🟢 GO (science/figures/code/stats GREEN) — ⏳ author-metadata 🔴 pending
@@ -52,7 +52,7 @@ endpoints (no silent omission). All numbers reproducible under seed `20260819`.
 - Author block = `[Author names and affiliations]` 🔴 placeholder.
 - Release commit SHA + results-manifest hash **patched** into the reproducibility
   sentence. Round 3 (2026-08-25) fixed Fig.1b/3b/4a/5b/6b + ED_Fig.3d text overlap
-  and re-baselined the manifest (commit `941eaff`, manifest `718f5fb5…`).
+  and re-baselined the manifest (commit `95b5026`, manifest `44fc3c85…`).
 
 ### 6. Submission materials (`submission_materials/`)
 `cover_letter_v34.md`, `author_contributions_v34.md` (🔴), `competing_interests_v34.md`
@@ -61,7 +61,7 @@ endpoints (no silent omission). All numbers reproducible under seed `20260819`.
 ### 7. GitHub sync
 All 24 v34 artifacts (code, docs, 6 figures × png/pdf, 4 ED figures × png/pdf,
 manuscript, manifest) **uploaded** to `PDAC-evidence-integration-audit` (main) via
-the GitHub Contents API. Local commit `941eaff` is the release pointer.
+the GitHub Contents API. Local commit `95b5026` is the release pointer.
 
 ---
 
