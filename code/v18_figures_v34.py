@@ -149,7 +149,8 @@ def fig1():
                        fontsize=6, color=INK)
     ax.set_xlabel("AUROC (95% CI, 2,000 bootstrap resamples)")
     ax.set_xlim(0.40, 1.02)
-    ax.set_title("Single evidence layers", fontsize=7.5, loc="left")
+    ax.set_title("Single evidence layers (endpoints E1, E3, E5)",
+                 fontsize=7.5, loc="left")
     below_legend(ax,
                  [Patch(fc=C_CENT, ec="none"),
                   Patch(fc=C_NEU, ec="none")],
@@ -169,9 +170,9 @@ def fig1():
                  fontsize=fs, color=INK)
 
     def hdr(x, y, txt, ec):
-        ax2.add_patch(Rectangle((x, y), 0.22, 0.22, fc=ec, ec="none"))
-        ax2.text(x + 0.32, y + 0.11, txt, ha="left", va="center",
-                 fontsize=4.6, color=INK)
+        ax2.add_patch(Rectangle((x, y), 0.24, 0.24, fc=ec, ec="none"))
+        ax2.text(x + 0.34, y + 0.12, txt, ha="left", va="center",
+                 fontsize=5.0, color=INK)
 
     # group headers
     hdr(0.4, 9.55, "External-label endpoints", C_CENT)
@@ -202,9 +203,6 @@ def fig1():
     box(7.2, 3.4, 2.75, 1.7, "E3-C tractability\nas label\n(n = %d)"
         % npos("E3-C out-of-evidence druggability"), C_CIRC, fs=4.4)
 
-    ax2.text(5.0, -0.25, "Blue: external-label endpoints  \u00b7  Grey: nested / duplicated"
-             "  \u00b7  Purple: constructed / circular diagnostics",
-             ha="center", fontsize=5.0, color=INK)
     panel(ax2, "b")
     save(fig, "Fig1")
 
@@ -263,7 +261,7 @@ def fig2():
     # Boundaries sit at x = 0.5, 2.5, 4.5 (between cells), NOT at cell centers, so
     # they can never cross an AUROC value. zorder kept below cell text (zorder=10).
     for xb in (0.5, 2.5, 4.5):
-        ax.axvline(xb, color="#999999", lw=1.2, zorder=4)
+        ax.axvline(xb, color="#999999", lw=0.8, zorder=4)
     ax.set_xticks(range(len(eps)))
     ax.set_xticklabels([EP_SHORT[e] for e in eps], fontsize=6, color=INK)
     ax.set_yticks(range(len(meths)))
@@ -285,10 +283,11 @@ def fig2():
     labels = ["centrality / single-layer", "fixed-form integration",
               "supervised learner", "other single layer", "constructed/circular"]
     below_legend(ax, handles, labels=labels, ncol=5, y=-0.22, fontsize=5.4)
-    ax.text(0.5, -0.36, "8 operational endpoints; six independent primary "
-            "endpoints (E1, E4, E5, E6). Purple columns = constructed/circular "
-            "diagnostics (E3, E3-C); E3-C AUROC = 1.000 is a label-as-input "
-            "control, not a model result.", transform=ax.transAxes, fontsize=5.2,
+    ax.text(0.5, -0.36, "8 operational endpoints; six primary endpoints: "
+            "E1, E3, E3-C, E4, E5 and E6 (E2 is nested in E1 and E3-A "
+            "reproduces E1). Purple columns = constructed/circular "
+            "diagnostics; E3-C AUROC = 1.000 is a label-as-input control, "
+            "not a model result.", transform=ax.transAxes, fontsize=5.2,
             color=INK, ha="center")
     save(fig, "Fig2")
 
@@ -506,7 +505,7 @@ def fig5():
                   Patch(fc=C_NEU, ec="none"), Patch(fc="#F0F0F0", ec=INK)],
                  labels=["STRING %.3f" % WS["string_auroc_e3"],
                          "prespecified %.3f" % WS["v17_chosen_weighting_auroc_e3"],
-                         "2.5 / 97.5 pct",
+                         "2.5th / 97.5th pct",
                          "median %.3f (IQR %.3f\u2013%.3f)" % (med, q25, q75)],
                  ncol=2, y=-0.46, fontsize=5.0, frameon=True, x=0.62)
     panel(ax, "b")
@@ -639,6 +638,11 @@ def fig6():
     ax.set_xlabel("AUROC on E6 (GDSC drug response)")
     ax.set_title("Pharmacological stress test (E6)", fontsize=7.5, loc="left")
     panel(ax, "b", external=True)
+    fig.text(0.5, 0.02, "All evaluated scorers on E6 (pharmacological-response "
+             "proxy): STRING centrality, Druggability, fixed-form integration "
+             "(harmonic, arithmetic, rank-aggregation, ECS) and supervised "
+             "learners (random forest, logistic regression, elastic net).",
+             ha="center", va="bottom", fontsize=5.0, color=INK)
     save(fig, "Fig6")
 
 
