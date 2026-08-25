@@ -107,9 +107,10 @@ def panel(ax, letter, external=False):
 
 
 def below_legend(ax, handles, ncol=2, y=-0.26, labels=None, loc="lower center",
-                 handlelength=1.2, columnspacing=1.0, fontsize=6, frameon=False):
+                 handlelength=1.2, columnspacing=1.0, fontsize=6, frameon=False,
+                 x=0.5):
     ax.legend(handles=handles, labels=labels, loc=loc,
-              bbox_to_anchor=(0.5, y), ncol=ncol, handlelength=handlelength,
+              bbox_to_anchor=(x, y), ncol=ncol, handlelength=handlelength,
               columnspacing=columnspacing, fontsize=fontsize, frameon=frameon,
               edgecolor=INK, fancybox=False, borderpad=0.5)
 
@@ -468,7 +469,7 @@ def fig5():
     ax.set_title("Fixed functional forms", fontsize=7.5, loc="left")
     handles = [Patch(fc=c, ec="none") for c in shades]
     ax.legend(handles=handles, labels=forms, loc="lower center",
-              bbox_to_anchor=(0.5, -0.44), ncol=3, handlelength=1.0,
+              bbox_to_anchor=(0.42, -0.44), ncol=3, handlelength=1.0,
               columnspacing=0.9, fontsize=5.4, frameon=True, edgecolor=INK,
               fancybox=False, borderpad=0.4)
     panel(ax, "a")
@@ -498,7 +499,7 @@ def fig5():
                          "prespecified %.3f" % WS["v17_chosen_weighting_auroc_e3"],
                          "2.5 / 97.5 pct",
                          "median %.3f (IQR %.2f\u2013%.2f)" % (med, q25, q75)],
-                 ncol=2, y=-0.46, fontsize=5.0, frameon=True)
+                 ncol=2, y=-0.46, fontsize=5.0, frameon=True, x=0.62)
     panel(ax, "b")
 
     # (c) negative controls (observed ECS: black text, not coloured)
