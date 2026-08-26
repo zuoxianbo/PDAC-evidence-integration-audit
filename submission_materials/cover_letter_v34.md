@@ -1,4 +1,4 @@
-# Cover letter — NCS v34 submission
+# Cover letter: NCS v34 submission
 
 **Manuscript:** "Auditing when evidence integration improves therapeutic target prioritization"
 **Journal:** *Nature Computational Science* (Content type: **Analysis**)
