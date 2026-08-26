@@ -1,9 +1,9 @@
-# Supplementary Tables — PDAC evidence-integration audit
+# Supplementary Tables: PDAC evidence-integration audit
 **Version stamp:** `v34_20260825`  |  Aligned with manuscript `manuscript_v34`
 
 All numbers are extracted from the precomputed result files (`v18_ncs_results.json`, `v18_weight_space.json`, `v18_sentinel_audit.json`). No values are fabricated; items requiring the raw third-party inputs are flagged explicitly.
 
-## Supplementary Table 2 — Endpoint provenance and independence matrix
+## Supplementary Table 2: Endpoint provenance and independence matrix
 
 | ID | Endpoint | Positive definition | Positives | Provenance class | Label external to evidence base |
 |---|---|---|---|---|---|
@@ -18,7 +18,7 @@ All numbers are extracted from the precomputed result files (`v18_ncs_results.js
 
 The six primary evaluation targets = E1, E4, E5, E6 (external-label) + E3, E3-C (constructed diagnostics). E2 and E3-A are reported for continuity and excluded from independent-endpoint counts.
 
-## Supplementary Table 4 — Full scorer × endpoint AUROC (AUPRC in brackets)
+## Supplementary Table 4: Full scorer × endpoint AUROC (AUPRC in brackets)
 
 Each cell: AUROC (AUPRC). 95% percentile CIs from 2,000 stratified bootstrap resamples are in `source_data_v34.csv`.
 
@@ -40,7 +40,7 @@ Each cell: AUROC (AUPRC). 95% percentile CIs from 2,000 stratified bootstrap res
 
 Supervised learners (logistic regression, elastic net, random forest) use out-of-fold predictions from five-fold stratified cross-validation. Learners on E3/E3-C are circular by construction and reported for completeness.
 
-### Supplementary Table 4 (continued) — Primary pairwise contrasts vs STRING centrality
+### Supplementary Table 4 (continued): Primary pairwise contrasts vs STRING centrality
 
 | Endpoint | Comparison | ΔAUROC (95% CI) | DeLong P |
 |---|---|---|---|
@@ -69,7 +69,7 @@ Supervised learners (logistic regression, elastic net, random forest) use out-of
 | E6 | Random forest | 0.003 (-0.032 to 0.040) | 0.864 |
 | E6 | ECS (multiplicative) | -0.208 (-0.330 to -0.087) | 0.000883 |
 
-## Supplementary Table 1 — Audit ledger (P0/P1 items, status and action)
+## Supplementary Table 1: Audit ledger (P0/P1 items, status and action)
 
 | Item | Requirement | Status | Action taken / evidence |
 |---|---|---|---|
@@ -86,16 +86,16 @@ Supervised learners (logistic regression, elastic net, random forest) use out-of
 | P1-7 | 'Primary contrasts were pre-specified' | Fixed | Methods → Statistics. |
 | P1-9 | Fig. 6 redesign; candidates → ED Fig. 4 | Fixed | Fig. 6 = pharmacological stress test (2 panels); candidates in ED Fig. 4. |
 
-## Supplementary Table 3 — Evidence-layer overlap with E5/E6 labels
+## Supplementary Table 3: Evidence-layer overlap with E5/E6 labels
 
 | Endpoint | Label source | Overlap with tractability/druggability layer | Evidence |
 |---|---|---|---|
-| E5 | nominal target of agents entering pancreatic clinical development (ClinicalTrials.gov, frozen 2024-12-31) | Yes — clinical development history favours druggable targets | qualitative; exact gene-level overlap deferred to released inputs |
-| E6 | nominal target of GDSC compounds in the most sensitive tertile (125 compounds, 29 lines) | Yes — GDSC compounds are, by construction, druggable | qualitative; exact overlap deferred to released inputs |
+| E5 | nominal target of agents entering pancreatic clinical development (ClinicalTrials.gov, frozen 2024-12-31) | Yes: clinical development history favours druggable targets | qualitative; exact gene-level overlap deferred to released inputs |
+| E6 | nominal target of GDSC compounds in the most sensitive tertile (125 compounds, 29 lines) | Yes: GDSC compounds are, by construction, druggable | qualitative; exact overlap deferred to released inputs |
 
 **Honesty note:** the gene-level overlap counts require the raw E5/E6 target lists and the tractability layer, which are not redistributed in this repository. The qualitative overlap is reported in the manuscript (Results, first section); the quantitative overlap is computed by `code/audit_overlap_p0_1_v32_20260824.py` once the inputs are released.
 
-## Supplementary Table 5 — Leakage-safe nested cross-validation protocol
+## Supplementary Table 5: Leakage-safe nested cross-validation protocol
 
 | Component | Specification |
 |---|---|
