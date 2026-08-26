@@ -172,10 +172,11 @@ def fig1():
     def hdr(x, y, txt, ec):
         ax2.add_patch(Rectangle((x, y), 0.24, 0.24, fc=ec, ec="none"))
         ax2.text(x + 0.34, y + 0.12, txt, ha="left", va="center",
-                 fontsize=5.0, color=INK)
+                 fontsize=4.4, color=INK)
 
-    # group headers
-    hdr(0.4, 9.55, "External-label endpoints", C_CENT)
+    # group headers -- short labels so the three provenance keys stay separated
+    # (no collision between "External-label" and "Nested / duplicated")
+    hdr(0.4, 9.55, "External-label", C_CENT)
     hdr(3.9, 9.55, "Nested / duplicated", C_NEU)
     hdr(7.2, 9.55, "Constructed / circular", C_CIRC)
 
@@ -284,8 +285,8 @@ def fig2():
     ax.text(0.5, -0.36, "8 operational endpoints; six primary endpoints: "
             "E1, E3, E3-C, E4, E5 and E6 (E2 is nested in E1 and E3-A "
             "reproduces E1). Purple columns = constructed/circular "
-            "diagnostics; E3-C AUROC = 1.000 is a label-as-input control, "
-            "not a model result.", transform=ax.transAxes, fontsize=5.2,
+            "diagnostics; AUROCs of 1.000 on E3-C are label-as-input "
+            "controls, not model results.", transform=ax.transAxes, fontsize=5.2,
             color=INK, ha="center")
     save(fig, "Fig2")
 
@@ -435,7 +436,10 @@ def fig4():
                     fontsize=5.6, color=INK, ha="right", va="bottom")
     ax.axvline(0.5, color=C_REF, lw=0.8, ls="--", zorder=0)
     ax.set_yticks(range(len(rows)))
-    ax.set_yticklabels([EP_SHORT[e] for (e, _) in rows], fontsize=6, color=INK)
+    # y=0 is the BOTTOM tick: labels must be given bottom-to-top. rows[0]=E3 is
+    # drawn at the TOP (y = len-1), so reverse the label order to match.
+    ax.set_yticklabels([EP_SHORT[e] for (e, _) in reversed(rows)],
+                       fontsize=6, color=INK)
     ax.set_xlim(0.42, 1.02); ax.set_ylim(-0.6, len(rows) - 0.1)
     ax.set_xlabel("AUROC of the integrated support mean")
     ax.set_title("Removing the label-embedded layer", fontsize=7.5, loc="left")
@@ -585,7 +589,7 @@ def fig6():
 
     box(0.4, 7.2, 4.6, 2.0, "GDSC v2 IC50 matrix\n%s PDAC lines \u00b7 %s drugs"
         % (nlines, ndrugs), "#EEF2F7", C_CENT)
-    box(5.0, 7.2, 4.6, 2.0, "drug-response labels\n%s sensitivities"
+    box(5.0, 7.2, 4.6, 2.0, "drug-response labels\n%s sensitive-tertile drugs"
         % ntert, "#EEF2F7", C_CENT)
     box(2.6, 4.4, 4.8, 1.8, "E6 PDAC pharmacological-response\nproxy (%s genes)"
         % npos, "#F3EFF8", C_CIRC)
