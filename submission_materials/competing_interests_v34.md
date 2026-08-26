@@ -1,6 +1,6 @@
-# Competing interests — NCS v34 (🔴 confirm before submission)
+# Competing interests: NCS v34 (🔴 confirm before submission)
 
-> **🔴 CONFIRM** — the statement below is the default Nature Portfolio wording for
+> **🔴 CONFIRM**: the statement below is the default Nature Portfolio wording for
 > a fully computational, publicly-funded study with no commercial involvement.
 > Replace with per-author disclosures if any author has a material conflict
 > (consulting, equity, patents, board membership) relevant to therapeutic target
