@@ -2,18 +2,18 @@
   "seed": 20260819,
   "n_boot": 2000,
   "figures": {
-    "Fig1_v34.png": "1b29d6275ec96fb9733f432358ae59e9cfd07ac8ffac9d9d1d5fd1960d66875d",
-    "Fig2_v34.png": "c9bce78374f65700c067ddded52f276bd6d39098b4a1926814612aa8b4e4411a",
-    "Fig3_v34.png": "cdd0d20ec18c53a9594ecea5770c441a296602c5564ffd937b5fb8e7c8b9defb",
-    "Fig4_v34.png": "cac2b1540e84b14255a9b3539871eed8cffb2ec4f33614243459b7a39a886948",
-    "Fig5_v34.png": "cc13af7073382dd4f28a1e6bd809c430d5089db6451710f51d03eaaaa30cb041",
-    "Fig6_v34.png": "c292b4d8d6962720be53ae0055e21a2d2a2a331fe132b4f6f0cfe710337ea2b2"
+    "Fig1_v34.png": "16bf4130dccb9fa8c0137a58e416db5419e993a7d4b84ae20ac05cefb4f0cd61",
+    "Fig2_v34.png": "9c93cdb9f845e18b27dd723bed35e8a4af5a98376a9c22fa55b529bd66b5af62",
+    "Fig3_v34.png": "f0a3aa35accd1ba954327824460ec28bc54225155d652466f12130d92001bd58",
+    "Fig4_v34.png": "22ad5351517be323778d72ade9e12e855b3db0c3e0c99cdac7b7c7a02c2897b0",
+    "Fig5_v34.png": "49f8101103ec854f69b8111c05d3b78e2e5bcfc98ed14e6eb1e893386742e987",
+    "Fig6_v34.png": "487c1668e563ed9721a5dd96dd1748c91309e885a27c81dbeaa57f44f89569ed"
   },
   "extended_data": {
     "ED_Fig1_v34.png": "4b620e03dc9222ecedce75ceb34fc78f6c7916971749383fe9d0e384db620872",
     "ED_Fig2_v34.png": "0f9065a38e895a9c063287a4038c7581e0454d49889d4a28523a1d3cc5c22f68",
     "ED_Fig3_v34.png": "f2e615cd50929e1d79a919cd5d117301ff134d9e2cbd374c537b11039c959b61",
-    "ED_Fig4_v34.png": "777ab21b125cf8899d1c738970f887196c61619220a3817e7fb207e9a9e35452"
+    "ED_Fig4_v34.png": "099811135b77d2b3091aabca829dbbd63a31958053d822c0d6b32da09b250b26"
   },
   "results_artefacts": {
     "v18_ncs_results.json": "29ca38ffeff3f9169c4901a347b83bb2c594427cc919ce520eb12c591bffc57e",
@@ -22,8 +22,8 @@
   },
   "code": {
     "v18_recompute.py": "2f0497379287b38bccb02e497e97d8fdb252c25f1353995bc5457a2bb5348728",
-    "v18_figures_v34.py": "e45e59935301cc6729ec5ef043a23cd5f19a2a0ae94b562a868365ae4abc0654",
-    "v18_ed_figures_v34.py": "97bdd8d8f1d425ec9dce0d5c3af638cc03d2f8f7badaa1a83949c650a5041cfa",
+    "v18_figures_v34.py": "151fc2995e6ceb4feffeeb3100c22ba9edcec98f64b583aa2819a5aa5596d45d",
+    "v18_ed_figures_v34.py": "e0fd6e338055164c76ed08a4a17ab8b692959abade29c35fd7a8ea9bec3d5bde",
     "verify_v34.py": "b2d98e32eae1bb830346ec3cd4d36a4bad5429b4b507a38f737de37d02cbaeaa"
   }
 }
