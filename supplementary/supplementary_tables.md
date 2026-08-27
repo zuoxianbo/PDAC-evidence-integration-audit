@@ -3,7 +3,7 @@ All numbers are extracted from the precomputed result files (`ncs_results.json`,
 
 ## Supplementary Table 2: Endpoint provenance and independence matrix
 
-| ID | Endpoint | Positive definition | Positives | Provenance class | Label external to evidence base |
+| ID | Endpoint | Positive definition | Positives | Provenance class | Label external to evidence base (external-label / constructed / circular) |
 |---|---|---|---|---|---|
 | E1 | PDAC-wide dependency | DepMap 23Q2 Chronos gene effect in pancreatic lines below the essentiality threshold | 4584 | external-label | yes |
 | E2 | PDAC-enriched dependency | upper quartile of the PDAC-vs-other selectivity statistic among E1 positives | 1147 | non-independent (stratification of E1) | yes (nested in E1) |
@@ -71,13 +71,13 @@ Supervised learners (logistic regression, elastic net, random forest) use out-of
 
 | Item | Requirement | Status | Action taken / evidence |
 |---|---|---|---|
-| P0-1 | E5/E6 source-overlap audit | Completed (qualitative); exact gene-level overlap requires released inputs | `code/audit_overlap.py`; E6 definition-overlap shown in Fig. 6; qualitative overlap reported in Results, exact gene-level overlap computed by the audit script once the released inputs are present. |
+| P0-1 | E5/E6 source-overlap audit | Qualitative overlap established; exact gene-level overlap requires the released inputs. | `code/audit_overlap.py`; E6 definition-overlap shown in Fig. 6; qualitative overlap reported in Results, exact gene-level overlap computed by the audit script once the released inputs are present. |
 | P0-2 | Leakage-safe nested cross-validation | Protocol specified; not used in the primary benchmark | `code/audit_nested_cv.py`; protocol described in Methods & Supp. Table 5; the released benchmark does not perform endpoint-specific hyperparameter search. |
 | P0-3 | Centrality annotation-density / study-bias | Completed | `code/audit_centrality_bias.py`; ED Fig. 1; caveat in Discussion. |
 | P0-4 | E4 cross-context wording | Fixed in text | 'demonstrates cross-context transfer but not fully independent external validity'. |
 | P0-5 | Three-class endpoint distinction | Fixed in text | 'six primary evaluation endpoints' + 'two non-independent constructs'. |
 | P0-6 | Dirichlet full distribution | Real numbers reported | 1,000 draws: mean 0.333, median 0.288, 91.2% below chance, 3.2% exceed centrality (0.738). |
-| P0-7 | Final clean rerun / provenance chain | Clean rerun completed; released-input rerun reproduced the reported benchmark results | `verify.py` asserts seed/sentinel/E3-A≡E1/E6-RF values and records SHA-256 of every figure + result artefact; 104 scorer-endpoint cells reproduced to six decimals; third-party raw source files are not redistributed, reproducibility is based on released harmonized inputs, manifests and recorded hashes. |
+| P0-7 | Final clean rerun / provenance chain | Clean rerun from the released inputs reproduced all 104 scorer-endpoint benchmark cells to six decimals. |
 | P1-1 | 'tractability/druggability layer' canonical terminology | Fixed | Throughout Methods/Results. |
 | P1-4 | E6 'pharmacological-response proxy' wording | Fixed | Results 'Cross-context transfer…' section; Fig. 6a label + Supplementary Table 2 entry. |
 | P1-5 | 'cannot be attributed to integration alone' (RF gain) | Fixed | Results, single-layer-vs-integration paragraph. |
@@ -88,10 +88,10 @@ Supervised learners (logistic regression, elastic net, random forest) use out-of
 
 | Endpoint | Label source | Overlap with tractability/druggability layer | Evidence |
 |---|---|---|---|
-| E5 | nominal target of agents entering pancreatic clinical development (ClinicalTrials.gov, frozen 2024-12-31) | Yes: clinical development history favours druggable targets | qualitative overlap reported in manuscript; exact gene-level overlap computed by code/audit_overlap.py once the released inputs are present |
-| E6 | nominal target of GDSC compounds in the most sensitive tertile (125 compounds, 29 lines) | Yes: GDSC compounds are, by construction, druggable | qualitative overlap reported in manuscript; exact overlap computed by code/audit_overlap.py once the released inputs are present |
+| E5 | nominal target of agents entering pancreatic clinical development (ClinicalTrials.gov, frozen 2024-12-31) | Yes: clinical development history favours druggable targets | qualitative overlap reported in manuscript; Gene-level overlap is not reported because the corresponding third-party target lists are not redistributed; the qualitative overlap relevant to endpoint provenance is reported here and in the manuscript. |
+| E6 | nominal target of GDSC compounds in the most sensitive tertile (125 compounds, 29 lines) | Yes: GDSC compounds are, by construction, druggable | qualitative overlap reported in manuscript; Gene-level overlap is not reported because the corresponding third-party target lists are not redistributed; the qualitative overlap relevant to endpoint provenance is reported here and in the manuscript. |
 
-**Honesty note:** the gene-level overlap counts require the raw E5/E6 target lists and the tractability layer, which are not redistributed in this repository. The qualitative overlap is reported in the manuscript (Results, first section); the quantitative overlap is computed by `code/audit_overlap.py` once the inputs are released.
+**Honesty note:** the gene-level overlap counts require the raw E5/E6 target lists and the tractability layer, which are not redistributed in this repository. The qualitative overlap is reported in the manuscript (Results, first section); the quantitative gene-level overlap is not reported.
 
 ## Supplementary Table 5: Leakage-safe nested cross-validation protocol
 
