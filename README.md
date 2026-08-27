@@ -11,12 +11,12 @@ input layer.
 
 ## Reproducibility status (v34)
 
-A **from-scratch clean rerun has been executed** and reproduces every number
-in the manuscript to six decimals. The frozen v34 commit records the git SHA and
-the results-manifest SHA-256 in `results/verify_v34_manifest.json`, produced by the
-one-command gate `python code/verify_v34.py`. Verification summary:
+Every number in the manuscript is reproduced to six decimals from the released
+result artefacts by the one-command gate `python code/verify_v34.py` (frozen v34
+commit; the git SHA and results-manifest SHA-256 are recorded in
+`results/verify_v34_manifest.json`). Verification summary:
 
-- 104 benchmark cells (12 scorers × 7 named + E6 endpoints): maximum absolute difference 0.0
+- 104 benchmark cells (13 scorers × 8 endpoints): maximum absolute difference 0.0
 - All headline AUROC/CI, negative controls, functional forms: identical
 - E6 Random-forest AUROC = 0.9134 (verified against `v18_source_data.csv`)
 - Sentinel audit S3: support-mean Φ(E3) = 0.889, without-druggability(E3) = 0.535,
@@ -26,14 +26,21 @@ one-command gate `python code/verify_v34.py`. Verification summary:
 Run `python code/verify_v34.py` to re-run the full integrity gate (stdlib only,
 no third-party packages required).
 
+Three supplementary audits (`audit_overlap_p0_1`, `audit_nested_cv_p0_2`,
+`audit_centrality_bias_p0_3`) additionally require the raw third-party inputs
+(DepMap 23Q2, GDSC/CCLE, and the druggability/tractability layer), which are not
+redistributed here for licensing reasons. Their scripts are ready to run and
+execute automatically once those inputs are released; their status is disclosed
+in Supplementary Tables 1, 3 and 5.
+
 ## Layout
 
 ```
 code/                     analysis scripts, in execution order
-  v18_recompute.py            endpoint taxonomy + 12×endpoint benchmark, CI, MWU, DeLong, Δ-CI
+  v18_recompute.py            endpoint taxonomy + 13×endpoint benchmark, CI, MWU, DeLong, Δ-CI
   v18_sentinel_audit.py       missing-data sentinel & combination-rule audit (S1–S4)
   v18_figures_v34.py          the six Nature display items (Fig1–6_v34, PNG+PDF)
-  v18_ed_figures_v32_20260824.py  Extended Data Figures 1-4
+  v18_ed_figures_v34.py        Extended Data Figures 1-4
   verify_v34.py               one-command reproducibility & integrity gate (stdlib only)
 results/                  machine-readable outputs (v18_*.json / csv) + verify_v34_manifest.json
 figures/                  the six display items (Fig1–6_v34.png + .pdf, 400 dpi)
@@ -52,11 +59,11 @@ manuscript.md / .docx     the final manuscript
 ```bash
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python code/v18_recompute.py         # endpoint taxonomy + 12×endpoint benchmark -> results/v18_ncs_results.json
+python code/v18_recompute.py         # endpoint taxonomy + 13×endpoint benchmark -> results/v18_ncs_results.json
 python code/v18_weightspace.py       # Dirichlet weight space -> results/v18_weight_space.json
 python code/v18_sentinel_audit.py    # sentinel / combination-rule audit -> results/v18_sentinel_audit.json
 python code/v18_figures_v34.py        # 6 Nature display items -> figures/Fig1–6_v34.png/.pdf
-python code/v18_ed_figures_v32_20260824.py   # 4 Extended Data figures
+python code/v18_ed_figures_v34.py   # 4 Extended Data figures
 python code/verify_v34.py             # one-command integrity gate -> results/verify_v34_manifest.json
 ```
 
