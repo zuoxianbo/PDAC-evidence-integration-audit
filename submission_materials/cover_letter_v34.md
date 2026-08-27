@@ -17,7 +17,7 @@ The main conceptual contribution is therefore not another target-ranking model, 
 
 We believe this work is particularly well suited to *Nature Computational Science* because it addresses a broadly applicable computational problem at the intersection of machine learning evaluation, biomedical data integration and therapeutic discovery. The conclusions extend beyond PDAC: they concern how computational researchers should construct endpoints, benchmark multimodal methods and distinguish genuine information gain from benchmark- or implementation-induced performance inflation.
 
-All primary inputs are public, the analysis is fully computational, and the released code regenerates the benchmark, sensitivity analyses and main display items. The manuscript includes explicit data availability, code availability, reproducibility and AI-use statements.
+All primary inputs are public, the analysis is fully computational, and the released code regenerates the benchmark, sensitivity analyses and main display items from the released result artefacts. Three supplementary audits that depend on raw third-party inputs (not redistributed for licensing reasons) are provided as ready-to-run scripts, with their status disclosed in Supplementary Tables 1, 3 and 5. The manuscript includes explicit data availability, code availability, reproducibility and AI-use statements.
 
 [RELATED MANUSCRIPTS: Insert either "The authors have no related manuscripts under consideration or in press elsewhere" or a complete disclosure of each related manuscript and its status.]
 
