@@ -100,9 +100,8 @@ def fig_ed1():
     ax.set_xlabel("Genes with no annotation (sentinel-coded as -3.0), %")
     ax.set_xlim(0, 112)
     mean_pct = SENT["S1_sentinel_coding"]["mean_pct_sentinel_across_layers"]
-    ax.set_title("Extended Data Fig. 1 | Annotation absence per evidence layer "
-                 "(mean %.1f%% across the nine layers)" % mean_pct,
-                 fontsize=7.5, loc="left", color=INK)
+    ax.set_title("Extended Data Fig. 1 | Study-bias and annotation-density audit "
+                 "of network centrality", fontsize=7.5, loc="left", color=INK)
     ax.text(50.8, len(names) - 0.35, "50%: median gene unannotated",
             fontsize=5.8, color=INK, ha="left", va="center")
     save(fig, "ED_Fig1")
@@ -128,9 +127,9 @@ def fig_ed2():
     ax.set_yticklabels([EP_SHORT[e] for e in eps], fontsize=6, color=INK)
     ax.set_xlabel("AUROC of the harmonic composite")
     ax.set_xlim(0.38, 1.02)
-    ax.set_title("Extended Data Fig. 2 | Missingness-encoding sensitivity: "
-                 "sentinel-coded versus missingness-aware", fontsize=7.5,
-                 loc="left", color=INK)
+    ax.set_title("Extended Data Fig. 2 | Missingness-encoding sensitivity, "
+                 "comparing available-case handling with missingness-aware analysis",
+                 fontsize=7.5, loc="left", color=INK)
     ax.legend(handles=[Patch(fc=C_NEU, ec="none", label="Sentinel-coded (-3.0 treated as a value)"),
                        Patch(fc=C_CIRC, ec="none", label="Missingness-aware (available-case)")],
               loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=2,
@@ -166,9 +165,16 @@ def fig_ed3():
     ax.set_xlabel("AUROC on E3", fontsize=6, color=INK)
     ax.set_ylabel("Dirichlet draws", fontsize=6, color=INK)
     ax.set_title("d", fontsize=9, fontweight="bold", loc="left", color=INK)
+    q25, q75 = np.percentile(smp, [25, 75])
+    q025, q975 = np.percentile(smp, [2.5, 97.5])
+    below = 100 * (smp < 0.5).mean()
+    above = 100 * (smp > WS["string_auroc_e3"]).mean()
     ax.text(0.97, 0.95,
-            "mean %.3f\nmedian %.3f\n91.2%% < chance\n3.2%% > centrality" %
-            (smp.mean(), np.median(smp)), transform=ax.transAxes, ha="right",
+            "mean %.3f  median %.3f\nIQR %.3f\u2013%.3f  max %.3f\n"
+            "2.5\u201397.5 pct: %.3f\u2013%.3f\n"
+            "%.1f%% < chance  %.1f%% > centrality" %
+            (smp.mean(), np.median(smp), q25, q75, smp.max(), q025, q975,
+             below, above), transform=ax.transAxes, ha="right",
             va="top", fontsize=5.2, color=INK,
             bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="none"))
     ax.legend(handles=[Patch(fc=C_CHANCE, ec="none", label="Chance (0.500)"),
@@ -178,9 +184,8 @@ def fig_ed3():
                              label="Prespecified weighting (%.3f)" % WS["v17_chosen_weighting_auroc_e3"])],
               loc="upper center", bbox_to_anchor=(0.5, -0.34), ncol=1,
               fontsize=5.8, labelcolor=INK)
-    fig.text(0.005, 0.985, "Extended Data Fig. 3 | 1,000 Dirichlet(1,1,1) "
-             "weightings of the three driver layers and the resulting E3 AUROC",
-             ha="left", va="top", fontsize=7.5, color=INK)
+    fig.text(0.005, 0.985, "Extended Data Fig. 3 | Full Dirichlet weight-space "
+             "distribution", ha="left", va="top", fontsize=7.5, color=INK)
     fig.text(0.005, 0.012, "Dashed lines in a-c mark the median drawn weight. "
              "Grey histograms show the distribution of draws; no weighting was "
              "selected post hoc.", ha="left", va="bottom", fontsize=5.8,
@@ -209,8 +214,8 @@ def fig_ed4():
     ax.axvline(90, color=C_CHANCE, lw=0.7, ls="--", zorder=0)
     ax.text(90.8, len(genes) - 0.3, "Top 10%", fontsize=5.8, color=INK,
             ha="left", va="center")
-    ax.set_title("Extended Data Fig. 4 | Nine candidate genes ranked by the "
-                 "harmonic composite", fontsize=7.5, loc="left", color=INK)
+    ax.set_title("Extended Data Fig. 4 | Nine candidate genes as prospective "
+                 "computational hypotheses", fontsize=7.5, loc="left", color=INK)
     ax.text(0.0, -0.30, "These are prospective computational hypotheses, not "
             "validated therapeutic targets; no experimental confirmation is "
             "claimed.", transform=ax.transAxes, fontsize=5.8, color=INK,
