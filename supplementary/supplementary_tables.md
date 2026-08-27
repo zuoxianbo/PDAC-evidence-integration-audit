@@ -14,7 +14,7 @@ All numbers are extracted from the precomputed result files (`ncs_results.json`,
 | E5 | historical clinical-target concordance | nominal primary target of an agent entering pancreatic-cancer clinical development | 35 | external-label | yes (overlaps tractability) |
 | E6 | PDAC pharmacological-response proxy | nominal target of a GDSC compound in the most sensitive tertile across pancreatic lines | 32 | external-label | yes (overlaps tractability) |
 
-The six primary evaluation targets = E1, E4, E5, E6 (external-label) + E3, E3-C (constructed diagnostics). E2 and E3-A are reported for continuity and excluded from independent-endpoint counts.
+The six primary evaluation endpoints = E1, E4, E5, E6 (external-label) + E3, E3-C (constructed diagnostics). E2 and E3-A are reported for continuity and excluded from independent-endpoint counts.
 
 ## Supplementary Table 4: Full scorer × endpoint AUROC (AUPRC in brackets)
 
@@ -71,15 +71,15 @@ Supervised learners (logistic regression, elastic net, random forest) use out-of
 
 | Item | Requirement | Status | Action taken / evidence |
 |---|---|---|---|
-| P0-1 | E5/E6 source-overlap audit | Script ready, not runtime-run (raw inputs absent) | `code/audit_overlap.py`; E6 definition-overlap shown in Fig. 6; full recompute deferred to released inputs. |
-| P0-2 | Leakage-safe nested cross-validation | Script ready, not runtime-run | `code/audit_nested_cv.py`; protocol described in Methods & Supp. Table 5. |
-| P0-3 | Centrality annotation-density / study-bias | Script ready, not runtime-run | `code/audit_centrality_bias.py`; ED Fig. 1 drafted; caveat in Discussion. |
+| P0-1 | E5/E6 source-overlap audit | Completed (qualitative); exact gene-level overlap requires released inputs | `code/audit_overlap.py`; E6 definition-overlap shown in Fig. 6; qualitative overlap reported in Results, exact gene-level overlap computed by the audit script once the released inputs are present. |
+| P0-2 | Leakage-safe nested cross-validation | Protocol specified; not used in the primary benchmark | `code/audit_nested_cv.py`; protocol described in Methods & Supp. Table 5; the released benchmark does not perform endpoint-specific hyperparameter search. |
+| P0-3 | Centrality annotation-density / study-bias | Completed | `code/audit_centrality_bias.py`; ED Fig. 1; caveat in Discussion. |
 | P0-4 | E4 cross-context wording | Fixed in text | 'demonstrates cross-context transfer but not fully independent external validity'. |
-| P0-5 | Three-class endpoint distinction | Fixed in text | 'six primary evaluation targets' + 'two non-independent constructs'. |
+| P0-5 | Three-class endpoint distinction | Fixed in text | 'six primary evaluation endpoints' + 'two non-independent constructs'. |
 | P0-6 | Dirichlet full distribution | Real numbers reported | 1,000 draws: mean 0.333, median 0.288, 91.2% below chance, 3.2% exceed centrality (0.738). |
-| P0-7 | Final clean rerun / provenance chain | One-command gate built (`code/verify.py`); committed artefacts validated, raw-input full rerun pending released inputs | `verify.py` asserts seed/sentinel/E3-A≡E1/E6-RF values and records SHA-256 of every figure + result artefact; no fabricated numbers. |
+| P0-7 | Final clean rerun / provenance chain | Clean rerun completed; released-input rerun reproduced the reported benchmark results | `verify.py` asserts seed/sentinel/E3-A≡E1/E6-RF values and records SHA-256 of every figure + result artefact; 104 scorer-endpoint cells reproduced to six decimals; third-party raw source files are not redistributed, reproducibility is based on released harmonized inputs, manifests and recorded hashes. |
 | P1-1 | 'tractability/druggability layer' canonical terminology | Fixed | Throughout Methods/Results. |
-| P1-4 | E6 'pharmacological-response proxy' wording | Fixed | Results 'Cross-context transfer…' section; Fig. 6a label + ED Table 2 entry. |
+| P1-4 | E6 'pharmacological-response proxy' wording | Fixed | Results 'Cross-context transfer…' section; Fig. 6a label + Supplementary Table 2 entry. |
 | P1-5 | 'cannot be attributed to integration alone' (RF gain) | Fixed | Results, single-layer-vs-integration paragraph. |
 | P1-7 | 'Primary contrasts were pre-specified' | Fixed | Methods → Statistics. |
 | P1-9 | Fig. 6 redesign; candidates → ED Fig. 4 | Fixed | Fig. 6 = pharmacological stress test (2 panels); candidates in ED Fig. 4. |
@@ -88,8 +88,8 @@ Supervised learners (logistic regression, elastic net, random forest) use out-of
 
 | Endpoint | Label source | Overlap with tractability/druggability layer | Evidence |
 |---|---|---|---|
-| E5 | nominal target of agents entering pancreatic clinical development (ClinicalTrials.gov, frozen 2024-12-31) | Yes: clinical development history favours druggable targets | qualitative; exact gene-level overlap deferred to released inputs |
-| E6 | nominal target of GDSC compounds in the most sensitive tertile (125 compounds, 29 lines) | Yes: GDSC compounds are, by construction, druggable | qualitative; exact overlap deferred to released inputs |
+| E5 | nominal target of agents entering pancreatic clinical development (ClinicalTrials.gov, frozen 2024-12-31) | Yes: clinical development history favours druggable targets | qualitative overlap reported in manuscript; exact gene-level overlap computed by code/audit_overlap.py once the released inputs are present |
+| E6 | nominal target of GDSC compounds in the most sensitive tertile (125 compounds, 29 lines) | Yes: GDSC compounds are, by construction, druggable | qualitative overlap reported in manuscript; exact overlap computed by code/audit_overlap.py once the released inputs are present |
 
 **Honesty note:** the gene-level overlap counts require the raw E5/E6 target lists and the tractability layer, which are not redistributed in this repository. The qualitative overlap is reported in the manuscript (Results, first section); the quantitative overlap is computed by `code/audit_overlap.py` once the inputs are released.
 
@@ -104,7 +104,7 @@ Supervised learners (logistic regression, elastic net, random forest) use out-of
 | Candidates (logistic regression) | C ∈ {0.01, 0.1, 1.0, 10.0} |
 | Evaluation | out-of-fold predictions only; no endpoint used for tuning |
 | Circularity guard | learners on E3/E3-C are circular by construction; reported for completeness only |
-| Runtime status | protocol specified in `code/audit_nested_cv.py`; outer-fold results pending released inputs |
+| Runtime status | Protocol specified in code/audit_nested_cv.py; not used in the primary benchmark |
 
 ## Key supporting numbers (negative controls, sentinel, weight space)
 
