@@ -201,7 +201,7 @@ def fig_ed4():
     y = np.arange(len(genes))[::-1]
     ax.barh(y, pct, 0.6, color=C_CIRC, ec="white", lw=0.3)
     for i, v in enumerate(pct):
-        ax.text(v + 0.8, y[i], "%.1f" % v, va="center", fontsize=6, color=INK)
+        ax.text(v + 0.8, y[i], "%.2f" % v, va="center", fontsize=6, color=INK)
     ax.set_yticks(y)
     ax.set_yticklabels(genes, fontsize=6.5, color=INK)
     ax.set_xlabel("Harmonic-composite genome-wide percentile")
