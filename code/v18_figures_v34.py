@@ -342,7 +342,7 @@ def fig3():
     ax.set_xticklabels(["community\nbootstrap"], fontsize=5.6)
     ax.set_ylabel("$\\Delta$AUROC, ECS $-$ STRING centrality")
     ax.set_title("Network-community resampling", fontsize=7.5, loc="left")
-    ax.text(0.97, 0.93, "%d communities \u00b7 %d resamples\n%.0f%% > 0 \u00b7 %.1f%% < 0"
+    ax.text(0.97, 0.93, "%d communities \u00b7 %d resamples\n%.1f%% > 0 \u00b7 %.1f%% < 0"
             % (S["n_communities"], S["n_bootstrap"], S["pct_positive"],
                100 - S["pct_positive"]),
             transform=ax.transAxes, fontsize=5.0, color=INK, va="top", ha="right")
@@ -366,7 +366,7 @@ def fig4():
     for i, f in enumerate(names):
         v = lay[f]["pct_sentinel"]
         ax.barh(i, v, 0.66, color=C_NEU, ec="white", lw=0.3)
-        ax.text(v + 1.2, i, "%.0f%%" % v, va="center", fontsize=5.4, color=INK)
+        ax.text(v + 1.2, i, "%.1f%%" % v, va="center", fontsize=5.4, color=INK)
     ax.axvline(50, color=C_CENT, lw=0.8, ls="--")
     ax.set_yticks(pos)
     ax.set_yticklabels([LAYER_NAME.get(f, f) for f in names], fontsize=5.4, color=INK)
@@ -640,7 +640,7 @@ def fig6():
     ax.set_xlabel("AUROC on E6 (GDSC drug response)")
     ax.set_title("Pharmacological stress test (E6)", fontsize=7.5, loc="left")
     panel(ax, "b", external=True)
-    fig.text(0.5, 0.02, "All evaluated scorers on E6 (pharmacological-response "
+    fig.text(0.5, 0.02, "Nine scorers evaluated on E6 (pharmacological-response "
              "proxy): STRING centrality, Druggability, fixed-form integration "
              "(harmonic, arithmetic, rank-aggregation, ECS) and supervised "
              "learners (random forest, logistic regression, elastic net).",
