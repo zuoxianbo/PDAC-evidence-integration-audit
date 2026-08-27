@@ -9,21 +9,21 @@ headline result is negative: fixed-form integration outperforms the strongest
 single layer (network centrality) only on endpoints whose labels embed an
 input layer.
 
-## Reproducibility status (v34)
+## Reproducibility status
 
 Every number in the manuscript is reproduced to six decimals from the released
-result artefacts by the one-command gate `python code/verify_v34.py` (frozen v34
+result artefacts by the one-command gate `python code/verify.py` (frozen
 commit; the git SHA and results-manifest SHA-256 are recorded in
-`results/verify_v34_manifest.json`). Verification summary:
+`results/verify_manifest.json`). Verification summary:
 
 - 104 benchmark cells (13 scorers × 8 endpoints): maximum absolute difference 0.0
 - All headline AUROC/CI, negative controls, functional forms: identical
-- E6 Random-forest AUROC = 0.9134 (verified against `v18_source_data.csv`)
+- E6 Random-forest AUROC = 0.9134 (verified against `source_data.csv`)
 - Sentinel audit S3: support-mean Φ(E3) = 0.889, without-druggability(E3) = 0.535,
   E3-A harmonic ≡ E1 harmonic (bit-identical taxonomy)
-- Every `figures/Fig*_v34.png` is SHA-256 recorded and re-checked on each run
+- Every `figures/Fig*.png` is SHA-256 recorded and re-checked on each run
 
-Run `python code/verify_v34.py` to re-run the full integrity gate (stdlib only,
+Run `python code/verify.py` to re-run the full integrity gate (stdlib only,
 no third-party packages required).
 
 Three supplementary audits (`audit_overlap_p0_1`, `audit_nested_cv_p0_2`,
@@ -37,21 +37,22 @@ in Supplementary Tables 1, 3 and 5.
 
 ```
 code/                     analysis scripts, in execution order
-  v18_recompute.py            endpoint taxonomy + 13×endpoint benchmark, CI, MWU, DeLong, Δ-CI
-  v18_sentinel_audit.py       missing-data sentinel & combination-rule audit (S1–S4)
-  v18_figures_v34.py          the six Nature display items (Fig1–6_v34, PNG+PDF)
-  v18_ed_figures_v34.py        Extended Data Figures 1-4
-  verify_v34.py               one-command reproducibility & integrity gate (stdlib only)
-results/                  machine-readable outputs (v18_*.json / csv) + verify_v34_manifest.json
-figures/                  the six display items (Fig1–6_v34.png + .pdf, 400 dpi)
+  recompute.py            endpoint taxonomy + 13×endpoint benchmark, CI, MWU, DeLong, Δ-CI
+  sentinel_audit.py       missing-data sentinel & combination-rule audit (S1–S4)
+  figures.py          the six Nature display items (Fig1–6, PNG+PDF)
+  ed_figures.py        Extended Data Figures 1-4
+  verify.py               one-command reproducibility & integrity gate (stdlib only)
+results/                  machine-readable outputs (ncs_results.json / weight_space.json /
+                        sentinel_audit.json / source_data.csv) + verify_manifest.json
+figures/                  the six display items (Fig1–6.png + .pdf, 400 dpi)
 extended_data/            Extended Data Figures 1-4 (PNG + PDF)
 supplementary/            Supplementary Tables 1-5 + source data
 submission_materials/     cover letter, author contributions, competing interests
-AUDIT_v34.md              last-pass audit of the 5 submission-critical routines
-STATS_v34.md              final statistical & methodological consistency check
-FIGCHECKLIST_v34.md       per-figure Nature production-grade checklist
-REPRODUCIBILITY_v34.md    reproducibility protocol & provenance
-manuscript.md / .docx     the final manuscript
+AUDIT.md              last-pass audit of the 5 submission-critical routines
+STATS.md              final statistical & methodological consistency check
+FIGCHECKLIST.md       per-figure Nature production-grade checklist
+REPRODUCIBILITY.md    reproducibility protocol & provenance
+manuscript.docx            the final manuscript (anonymized repository copy)
 ```
 
 ## Reproducing
@@ -59,12 +60,12 @@ manuscript.md / .docx     the final manuscript
 ```bash
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python code/v18_recompute.py         # endpoint taxonomy + 13×endpoint benchmark -> results/v18_ncs_results.json
-python code/v18_weightspace.py       # Dirichlet weight space -> results/v18_weight_space.json
-python code/v18_sentinel_audit.py    # sentinel / combination-rule audit -> results/v18_sentinel_audit.json
-python code/v18_figures_v34.py        # 6 Nature display items -> figures/Fig1–6_v34.png/.pdf
-python code/v18_ed_figures_v34.py   # 4 Extended Data figures
-python code/verify_v34.py             # one-command integrity gate -> results/verify_v34_manifest.json
+python code/recompute.py         # endpoint taxonomy + 13×endpoint benchmark -> results/ncs_results.json
+python code/weightspace.py       # Dirichlet weight space -> results/weight_space.json
+python code/sentinel_audit.py    # sentinel / combination-rule audit -> results/sentinel_audit.json
+python code/figures.py        # 6 Nature display items -> figures/Fig1–6.png/.pdf
+python code/ed_figures.py   # 4 Extended Data figures
+python code/verify.py             # one-command integrity gate -> results/verify_manifest.json
 ```
 
 For large-memory-constrained environments, `code/rerun_segmented.py`
@@ -77,7 +78,7 @@ by the 2,000-resample bootstrap confidence intervals. No network access is
 required at run time; no GPU is used.
 
 Environment: Python 3.11.9, numpy 1.26.4, scipy 1.17.1, scikit-learn 1.9.0
-(`environment_lock_v32_20260824.txt`).
+(`environment_lock.txt`).
 
 ## Inputs
 
@@ -85,7 +86,7 @@ Third-party inputs (DepMap 23Q2, GDSC/CCLE, STRING v12.0, COSMIC, gnomAD,
 IMPC, Open Targets Genetics, Human Protein Atlas, ClinicalTrials.gov) are
 **not redistributed** here because they are governed by their originators'
 licences. Each is identified by SHA-256 and byte size in
-`final_input_manifest_v32_20260824.csv`, so identity can be verified before a
+`final_input_manifest.csv`, so identity can be verified before a
 rerun. The harmonised nine-layer evidence table and the complete benchmark
 outputs are released in full in `results/`.
 

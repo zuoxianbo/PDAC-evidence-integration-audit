@@ -2,20 +2,20 @@
 # -*- coding: utf-8 -*-
 """分段重算 wrapper：逐个 endpoint 跑 benchmark，即时保存，支持断点续传。
 
-复用 v18_recompute.py 的 sections 1-6（数据加载、端点构建、scorer、统计函数），
+复用 recompute.py 的 sections 1-6（数据加载、端点构建、scorer、统计函数），
 然后自己写 benchmark 循环，每跑完一个 endpoint 立即写盘，避免长任务被回收。
 """
 import json, os, time, sys
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = open(os.path.join(HERE, "v18_recompute.py")).read()
+SRC = open(os.path.join(HERE, "recompute.py")).read()
 MARK = "# 7. MAIN BENCHMARK"
 assert MARK in SRC, "marker not found"
 PREFIX = SRC.split(MARK)[0]
 
-ns = {"__name__": "v18_prefix", "__file__": os.path.join(HERE, "v18_recompute.py")}
-exec(compile(PREFIX, "v18_recompute.py[sections 1-6]", "exec"), ns)
+ns = {"__name__": "v18_prefix", "__file__": os.path.join(HERE, "recompute.py")}
+exec(compile(PREFIX, "recompute.py[sections 1-6]", "exec"), ns)
 
 X = ns["X"]; ENDPOINTS = ns["ENDPOINTS"]; SCORES = ns["SCORES"]
 FORMS = ns["FORMS"]; RES = ns["RES"]; N_GENES = ns["N_GENES"]; N_BOOT = ns["N_BOOT"]

@@ -1,0 +1,29 @@
+{
+  "seed": 20260819,
+  "n_boot": 2000,
+  "figures": {
+    "Fig1.png": "1b29d6275ec96fb9733f432358ae59e9cfd07ac8ffac9d9d1d5fd1960d66875d",
+    "Fig2.png": "c9bce78374f65700c067ddded52f276bd6d39098b4a1926814612aa8b4e4411a",
+    "Fig3.png": "a4d36f9fc5c52a044fbde3140475c0a71696f5c1201ce199b4352763d007eaaf",
+    "Fig4.png": "9879d51006494a2da40d2c637267e1c195713670782fa491cd22f2707acb3afe",
+    "Fig5.png": "cc13af7073382dd4f28a1e6bd809c430d5089db6451710f51d03eaaaa30cb041",
+    "Fig6.png": "487c1668e563ed9721a5dd96dd1748c91309e885a27c81dbeaa57f44f89569ed"
+  },
+  "extended_data": {
+    "ED_Fig1.png": "cb1e37805e5bffa188dfc5be3ab533d95feb84c81191a8f017745fd90e601158",
+    "ED_Fig2.png": "f5e433cc66407d666ef54f9d010e1337e608fc5b6b9782a9cc0e8f6c5dbe9ceb",
+    "ED_Fig3.png": "56f4f2d9b11d4cc8b91ca3fa85da9898aba280b6eb4f0cf0fa45dfea70ec945c",
+    "ED_Fig4.png": "ef822d0adb0b65909760329d13ec68c5b8e6755f56dd60d724cd25295457b935"
+  },
+  "results_artefacts": {
+    "ncs_results.json": "29ca38ffeff3f9169c4901a347b83bb2c594427cc919ce520eb12c591bffc57e",
+    "sentinel_audit.json": "054f345e73dd9dfbfebb528109bb1b681e50957bedea5a1812c9d59b98be0f8d",
+    "source_data.csv": "704033f27df05103fc10755690dbf7445969b593b621eac79f099fde8b061dec"
+  },
+  "code": {
+    "recompute.py": "589bcccbf8faa842e1e39beb4823a6adbb78d72790f14c72609cae1baf114eec",
+    "figures.py": "bf22ee0cc039e818082814a06e36c476571b33e9af226f29d2e22254713a11c1",
+    "ed_figures.py": "9f1dc3592a8867d73cee5e92898d8d254f25e0a6bc922da9814f666e5569a07f",
+    "verify.py": "013cb074ef72f2e357287d252b2f4509df9f3921973fb0fae0b9c2d36c7bb8a0"
+  }
+}
